@@ -193,5 +193,10 @@ window.I18N['fr'] = {
     "wizard.result.assWeb.badge": "Architecture avancée : ASS + WebAssembly",
     "wizard.result.assWeb.title": "Recommandation : ASS avec JASSUB / SubtitlesOctopus comme moteur de rendu web",
     "wizard.result.assWeb.desc": "Pour ne pas graver les effets ASS en dur dans la vidéo (Hardsub) et préserver la qualité d’image comme la souplesse du changement de langue, il suffit de charger côté client un package open source compilant libass (C++) en WebAssembly (comme JASSUB) : un &lt;canvas&gt; transparent superposé au &lt;video&gt; rend les effets ASS en direct.",
-    "wizard.result.preview": "Aperçu de ce format dans le bac à sable ci-dessus →"
+    "wizard.result.preview": "Aperçu de ce format dans le bac à sable ci-dessus →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — Le guide interactif des formats de sous-titres",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

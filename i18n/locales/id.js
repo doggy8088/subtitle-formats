@@ -193,5 +193,10 @@ window.I18N['id'] = {
     "wizard.result.assWeb.badge": "Arsitektur lanjutan: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Disarankan memakai ASS bersama renderer web JASSUB / SubtitlesOctopus",
     "wizard.result.assWeb.desc": "Jika tidak ingin menge-hardsub ASS menjadi subtitle mati (Hardsub) yang mengorbankan kualitas gambar dan fleksibilitas berganti bahasa, muat paket open source kompilasi C++ libass ke WebAssembly (seperti JASSUB) di sisi web, lalu letakkan &lt;canvas&gt; transparan di atas &lt;video&gt; untuk me-render efek ASS secara langsung.",
-    "wizard.result.preview": "Pratinjau format ini di sandbox di atas →"
+    "wizard.result.preview": "Pratinjau format ini di sandbox di atas →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — Panduan Lengkap Interaktif Format Subtitle",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

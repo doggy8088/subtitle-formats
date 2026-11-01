@@ -871,6 +871,15 @@
             </div>
         </section>
 
+        <!-- 頁尾授權聲明 -->
+        <footer class="mt-10 pt-5 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500 dark:text-slate-400">
+            <p>
+                <span data-i18n="footer.copyright">© 2026 Will 保哥</span>
+                <span aria-hidden="true">·</span>
+                <a href="https://github.com/doggy8088/subtitle-formats/blob/main/LICENSE" target="_blank" rel="noopener" class="underline underline-offset-2 decoration-slate-400/60 hover:decoration-current hover:text-slate-700 dark:hover:text-slate-200 transition" data-i18n="footer.license">MIT License</a>
+            </p>
+        </footer>
+
     </main>
 
     <!-- ============================================================
@@ -994,6 +1003,13 @@
                 var scope = (root && root.querySelectorAll) ? root : document;
                 var nodes = scope.querySelectorAll('[data-i18n],[data-i18n-html],[data-i18n-attr]');
                 for (var i = 0; i < nodes.length; i++) translateElement(nodes[i]);
+            }
+
+            // 分頁標題（document.title）隨語系更新；靜態 <title> 保留繁體中文，
+            // 供搜尋引擎與社群預覽擷取預設語系內容
+            function applyDocTitle() {
+                var title = t('doc.title');
+                if (title && title !== 'doc.title') document.title = title;
             }
 
             // 動態字串助手：寫入文字並同步掛鉤，之後 applyI18n 可正確重翻譯
@@ -1125,6 +1141,7 @@
                     try { window.localStorage.setItem(LOCALE_STORAGE_KEY, code); } catch (e) {}
                     document.documentElement.setAttribute('lang', code);
                     applyI18n(document);
+                    applyDocTitle();
                     syncLangUI();
                     if (typeof window.renderDynamicUI === 'function') window.renderDynamicUI();
                 });
@@ -1173,6 +1190,7 @@
             buildLangMenu();
             syncLangUI();
             applyI18n(document);
+            applyDocTitle();
 
             // 供頁面腳本使用
             window.t = t;

@@ -184,5 +184,10 @@ window.I18N['de'] = {
     "wizard.result.assWeb.badge": "Fortgeschrittenes Setup: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Empfehlung: ASS mit JASSUB / SubtitlesOctopus im Browser rendern",
     "wizard.result.assWeb.desc": "Damit ASS nicht fest ins Bild eingebrannt wird (Hardsub) und Bildqualität sowie Sprachumschaltung verloren gehen, lässt sich im Browser ein quelloffenes Paket laden, das C++ libass als WebAssembly kompiliert (z. B. JASSUB). Ein transparentes &lt;canvas&gt; über &lt;video&gt; rendert die ASS-Effekte dann live.",
-    "wizard.result.preview": "Dieses Format oben in der Sandbox vorab testen →"
+    "wizard.result.preview": "Dieses Format oben in der Sandbox vorab testen →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — Interaktiver Leitfaden zu Untertitelformaten",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

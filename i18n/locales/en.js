@@ -193,5 +193,10 @@ window.I18N['en'] = {
     "wizard.result.assWeb.badge": "Advanced setup: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Use ASS with JASSUB / SubtitlesOctopus as the web renderer",
     "wizard.result.assWeb.desc": "If you'd rather not burn ASS in as a hardsub — losing picture quality and language switching — load an open-source C++ libass compiled to WebAssembly (like JASSUB) and render ASS live on a transparent &lt;canvas&gt; layered over &lt;video&gt;.",
-    "wizard.result.preview": "Preview this format in the sandbox above →"
+    "wizard.result.preview": "Preview this format in the sandbox above →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — The Complete Interactive Guide to Subtitle Formats",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

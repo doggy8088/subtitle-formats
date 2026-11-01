@@ -193,5 +193,10 @@ window.I18N['th'] = {
     "wizard.result.assWeb.badge": "สถาปัตยกรรมขั้นสูง: ASS + WebAssembly",
     "wizard.result.assWeb.title": "แนะนำใช้ ASS คู่กับตัวเรนเดอร์บนเว็บ JASSUB / SubtitlesOctopus",
     "wizard.result.assWeb.desc": "หากไม่อยากฝัง ASS เป็นซับถาวร (Hardsub) จนเสียคุณภาพของภาพและความยืดหยุ่นในการสลับหลายภาษา สามารถโหลดแพ็กเกจโอเพนซอร์สที่คอมไพล์ libass ภาษา C++ เป็น WebAssembly (เช่น JASSUB) ฝั่งเว็บ แล้ววาง &lt;canvas&gt; โปร่งแสงทับ &lt;video&gt; เพื่อเรนเดอร์เอฟเฟกต์ ASS แบบเรียลไทม์",
-    "wizard.result.preview": "ดูตัวอย่างฟอร์แมตนี้ในแซนด์บ็อกซ์ด้านบน →"
+    "wizard.result.preview": "ดูตัวอย่างฟอร์แมตนี้ในแซนด์บ็อกซ์ด้านบน →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — เจาะลึกรูปแบบซับไตเติลแบบโต้ตอบ",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

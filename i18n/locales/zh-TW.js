@@ -210,5 +210,10 @@ window.I18N['zh-TW'] = {
     "wizard.result.assWeb.badge": "進階架構：ASS + WebAssembly",
     "wizard.result.assWeb.title": "建議採用 ASS 搭配 JASSUB / SubtitlesOctopus 網頁渲染器",
     "wizard.result.assWeb.desc": "若不希望將 ASS 壓製成死字幕 (Hardsub) 犧牲畫質與多語切換彈性，可在網頁端載入將 C++ libass 編譯為 WebAssembly 的開源套件 (如 JASSUB)，直接於 &lt;video&gt; 上層覆蓋透明 &lt;canvas&gt; 即時算繪 ASS 特效。",
-    "wizard.result.preview": "在上方沙盒預覽此格式 →"
+    "wizard.result.preview": "在上方沙盒預覽此格式 →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — 互動式字幕格式全解析",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

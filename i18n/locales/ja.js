@@ -211,5 +211,10 @@ window.I18N['ja'] = {
     "wizard.result.assWeb.badge": "高度な構成：ASS + WebAssembly",
     "wizard.result.assWeb.title": "ASS は JASSUB / SubtitlesOctopus のウェブレンダラーと組み合わせるのがおすすめです",
     "wizard.result.assWeb.desc": "ASS を焼き込み字幕（Hardsub）にして画質や多言語切り替えの自由度を失いたくない場合は、C++ の libass を WebAssembly にコンパイルしたオープンソースのパッケージ（JASSUB など）をウェブ側で読み込みます。透明な &lt;canvas&gt; を &lt;video&gt; の上に重ね、ASS エフェクトをリアルタイムにレンダリングできます。",
-    "wizard.result.preview": "このフォーマットを上のサンドボックスでプレビュー →"
+    "wizard.result.preview": "このフォーマットを上のサンドボックスでプレビュー →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — 動画字幕フォーマット完全解説",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

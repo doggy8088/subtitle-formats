@@ -193,5 +193,10 @@ window.I18N['vi'] = {
     "wizard.result.assWeb.badge": "Kiến trúc nâng cao: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Khuyên dùng ASS cùng trình kết xuất web JASSUB / SubtitlesOctopus",
     "wizard.result.assWeb.desc": "Nếu không muốn nung cứng ASS thành phụ đề chết (Hardsub) làm mất chất lượng hình ảnh và tính linh hoạt khi đổi ngôn ngữ, bạn có thể nạp phía web gói mã nguồn mở biên dịch C++ libass thành WebAssembly (như JASSUB), phủ một lớp &lt;canvas&gt; trong suốt ngay trên &lt;video&gt; để kết xuất thời gian thực các hiệu ứng ASS.",
-    "wizard.result.preview": "Xem trước định dạng này trong sandbox phía trên →"
+    "wizard.result.preview": "Xem trước định dạng này trong sandbox phía trên →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — Hướng dẫn tương tác toàn diện về định dạng phụ đề",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };

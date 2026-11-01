@@ -193,5 +193,10 @@ window.I18N['ko'] = {
     "wizard.result.assWeb.badge": "고급 아키텍처: ASS + WebAssembly",
     "wizard.result.assWeb.title": "ASS + JASSUB / SubtitlesOctopus 웹 렌더러를 권장합니다",
     "wizard.result.assWeb.desc": "ASS를 고정 자막(Hardsub)으로 굽어 화질과 다중 언어 전환 유연성을 희생하고 싶지 않다면, C++ libass를 WebAssembly로 컴파일한 오픈 소스 패키지 (예: JASSUB)를 웹에서 불러올 수 있습니다. &lt;video&gt; 위에 투명 &lt;canvas&gt;를 덮어 ASS 이펙트를 실시간으로 렌더링합니다.",
-    "wizard.result.preview": "위의 샌드박스에서 이 포맷을 미리보기 →"
+    "wizard.result.preview": "위의 샌드박스에서 이 포맷을 미리보기 →",
+
+    /* ---------- Document title & footer ---------- */
+    "doc.title": "SRT vs VTT vs ASS — 영상 자막 포맷 완전 가이드",
+    "footer.copyright": "© 2026 Will 保哥",
+    "footer.license": "MIT License"
 };
