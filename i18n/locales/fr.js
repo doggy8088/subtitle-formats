@@ -24,7 +24,7 @@ window.I18N['fr'] = {
     "card.srt.chip.ms": "Millisecondes virgule (,000)",
     "card.srt.chip.html": "Balises HTML de base",
     "card.vtt.tagline": "Standard web du W3C",
-    "card.vtt.desc": "Conçu pour la balise HTML5 `<video>` et le streaming (HLS/DASH). Prise en charge native du rendu stylé via CSS `::cue`, du positionnement en pourcentage et des chapitres.",
+    "card.vtt.desc": "Conçu pour la balise HTML5 `&lt;video&gt;` et le streaming (HLS/DASH). Prise en charge native du rendu stylé via CSS `::cue`, du positionnement en pourcentage et des chapitres.",
     "card.vtt.chip.header": "En-tête WEBVTT",
     "card.vtt.chip.ms": "Millisecondes point (.000)",
     "card.vtt.chip.css": "Pseudo-éléments CSS",
@@ -186,12 +186,12 @@ window.I18N['fr'] = {
     "wizard.result.srt.desc": "Presque toutes les plateformes sociales (YouTube, Facebook, IG), les logiciels de montage non linéaire (Premiere Pro, DaVinci Resolve) et les modèles de transcription vocale par IA (OpenAI Whisper) font de SRT l’étalon d’échange le plus fiable. Aucun risque d’erreur d’analyse lié à des balises complexes.",
     "wizard.result.webvtt.badge": "Standard unique : WebVTT (.vtt)",
     "wizard.result.webvtt.title": "Recommandation : le format HTML5 WebVTT",
-    "wizard.result.webvtt.desc": "Les balises <video> et <track> des navigateurs modernes ne prennent nativement en charge que WebVTT. En plus d’unifier l’apparence des sous-titres du site via CSS ::cue, le format VTT stocke les chapitres (Chapters) et les vignettes de prévisualisation (Thumbnails), et reste le standard d’encapsulation pour le streaming HLS / MPEG-DASH.",
+    "wizard.result.webvtt.desc": "Les balises &lt;video&gt; et &lt;track&gt; des navigateurs modernes ne prennent nativement en charge que WebVTT. En plus d’unifier l’apparence des sous-titres du site via CSS ::cue, le format VTT stocke les chapitres (Chapters) et les vignettes de prévisualisation (Thumbnails), et reste le standard d’encapsulation pour le streaming HLS / MPEG-DASH.",
     "wizard.result.ass.badge": "Premier choix pour les effets : ASS (.ass)",
     "wizard.result.ass.title": "Recommandation : Aegisub + sous-titres ASS à effets",
     "wizard.result.ass.desc": "Dès qu’il faut des « tailles de police distinctes pour deux langues », des « notes explicatives en haut de l’écran », un « calage en rotation sur une enseigne en arrière-plan (Typesetting) » ou un « remplissage karaoké lettre par lettre », SRT et VTT montrent leurs limites : seul le format ASS, avec ses coordonnées de canevas dédiées et ses balises de substitution, convient.",
     "wizard.result.assWeb.badge": "Architecture avancée : ASS + WebAssembly",
     "wizard.result.assWeb.title": "Recommandation : ASS avec JASSUB / SubtitlesOctopus comme moteur de rendu web",
-    "wizard.result.assWeb.desc": "Pour ne pas graver les effets ASS en dur dans la vidéo (Hardsub) et préserver la qualité d’image comme la souplesse du changement de langue, il suffit de charger côté client un package open source compilant libass (C++) en WebAssembly (comme JASSUB) : un <canvas> transparent superposé au <video> rend les effets ASS en direct.",
+    "wizard.result.assWeb.desc": "Pour ne pas graver les effets ASS en dur dans la vidéo (Hardsub) et préserver la qualité d’image comme la souplesse du changement de langue, il suffit de charger côté client un package open source compilant libass (C++) en WebAssembly (comme JASSUB) : un &lt;canvas&gt; transparent superposé au &lt;video&gt; rend les effets ASS en direct.",
     "wizard.result.preview": "Aperçu de ce format dans le bac à sable ci-dessus →"
 };

@@ -24,7 +24,7 @@ window.I18N['th'] = {
     "card.srt.chip.ms": "มิลลิวินาทีคั่นจุลภาค (,000)",
     "card.srt.chip.html": "แท็ก HTML พื้นฐาน",
     "card.vtt.tagline": "มาตรฐานเว็บจาก W3C",
-    "card.vtt.desc": "ออกแบบมาเพื่อ `<video>` ของ HTML5 และสตรีมมิง (HLS/DASH) โดยเฉพาะ รองรับการเรนเดอร์สไตล์ CSS `::cue` การจัดตำแหน่งด้วยเปอร์เซ็นต์ และข้อมูลแชปเตอร์ในตัว",
+    "card.vtt.desc": "ออกแบบมาเพื่อ `&lt;video&gt;` ของ HTML5 และสตรีมมิง (HLS/DASH) โดยเฉพาะ รองรับการเรนเดอร์สไตล์ CSS `::cue` การจัดตำแหน่งด้วยเปอร์เซ็นต์ และข้อมูลแชปเตอร์ในตัว",
     "card.vtt.chip.header": "ส่วนหัวไฟล์ WEBVTT",
     "card.vtt.chip.ms": "มิลลิวินาทีคั่นจุด (.000)",
     "card.vtt.chip.css": "รองรับเพซูโดอิลิเมนต์ CSS",
@@ -186,12 +186,12 @@ window.I18N['th'] = {
     "wizard.result.srt.desc": "เกือบทุกแพลตฟอร์มโซเชียล (YouTube, Facebook, IG) โปรแกรมตัดต่อแบบไม่เชิงเส้น (Premiere Pro, DaVinci Resolve) และโมเดลถอดเสียงเป็นข้อความด้วย AI (OpenAI Whisper) ล้วนใช้ SRT เป็นมาตรฐานกลางที่เสถียรที่สุด จึงไม่เกิดข้อผิดพลาดในการพาร์สเพราะแท็กที่ซับซ้อน",
     "wizard.result.webvtt.badge": "มาตรฐานเดียว: WebVTT (.vtt)",
     "wizard.result.webvtt.title": "แนะนำใช้ฟอร์แมต HTML5 WebVTT",
-    "wizard.result.webvtt.desc": "แท็ก <video> และ <track> ในเบราว์เซอร์ยุคใหม่รองรับเฉพาะ WebVTT เท่านั้น นอกจากควบคุมรูปลักษณ์ซับไตเติลทั้งเว็บได้ผ่าน CSS ::cue แล้ว ยังใช้ VTT เก็บจุดแชปเตอร์ (Chapters) และภาพย่อพรีวิวบนไทม์ไลน์ (Thumbnails) ได้ อีกทั้งเป็นฟอร์แมตมาตรฐานสำหรับการแพ็กสตรีม HLS / MPEG-DASH",
+    "wizard.result.webvtt.desc": "แท็ก &lt;video&gt; และ &lt;track&gt; ในเบราว์เซอร์ยุคใหม่รองรับเฉพาะ WebVTT เท่านั้น นอกจากควบคุมรูปลักษณ์ซับไตเติลทั้งเว็บได้ผ่าน CSS ::cue แล้ว ยังใช้ VTT เก็บจุดแชปเตอร์ (Chapters) และภาพย่อพรีวิวบนไทม์ไลน์ (Thumbnails) ได้ อีกทั้งเป็นฟอร์แมตมาตรฐานสำหรับการแพ็กสตรีม HLS / MPEG-DASH",
     "wizard.result.ass.badge": "ฟอร์แมตเอฟเฟกต์แนะนำ: ASS (.ass)",
     "wizard.result.ass.title": "แนะนำใช้ Aegisub คู่กับฟอร์แมตซับไตเติลเอฟเฟกต์ ASS",
     "wizard.result.ass.desc": "เมื่อวิดีโอต้องการ「ซับไตเติลสองภาษาขนาดฟอนต์ต่างกัน」 「คำอธิบายศัพท์เฉพาะด้านบนจอ」 「ข้อความเอียงเคลื่อนที่ตามป้ายฉากหลัง (Typesetting)」 หรือ「คาราโอเกะ KTV ไล่สีทีละคำ」 SRT และ VTT รับมือไม่ไหว ต้องใช้ฟอร์แมต ASS ที่มีพิกัดแคนวาสเฉพาะและคำสั่งควบคุมระดับบรรทัด",
     "wizard.result.assWeb.badge": "สถาปัตยกรรมขั้นสูง: ASS + WebAssembly",
     "wizard.result.assWeb.title": "แนะนำใช้ ASS คู่กับตัวเรนเดอร์บนเว็บ JASSUB / SubtitlesOctopus",
-    "wizard.result.assWeb.desc": "หากไม่อยากฝัง ASS เป็นซับถาวร (Hardsub) จนเสียคุณภาพของภาพและความยืดหยุ่นในการสลับหลายภาษา สามารถโหลดแพ็กเกจโอเพนซอร์สที่คอมไพล์ libass ภาษา C++ เป็น WebAssembly (เช่น JASSUB) ฝั่งเว็บ แล้ววาง <canvas> โปร่งแสงทับ <video> เพื่อเรนเดอร์เอฟเฟกต์ ASS แบบเรียลไทม์",
+    "wizard.result.assWeb.desc": "หากไม่อยากฝัง ASS เป็นซับถาวร (Hardsub) จนเสียคุณภาพของภาพและความยืดหยุ่นในการสลับหลายภาษา สามารถโหลดแพ็กเกจโอเพนซอร์สที่คอมไพล์ libass ภาษา C++ เป็น WebAssembly (เช่น JASSUB) ฝั่งเว็บ แล้ววาง &lt;canvas&gt; โปร่งแสงทับ &lt;video&gt; เพื่อเรนเดอร์เอฟเฟกต์ ASS แบบเรียลไทม์",
     "wizard.result.preview": "ดูตัวอย่างฟอร์แมตนี้ในแซนด์บ็อกซ์ด้านบน →"
 };

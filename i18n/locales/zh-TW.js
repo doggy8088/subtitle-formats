@@ -41,7 +41,7 @@ window.I18N['zh-TW'] = {
     "card.srt.chip.ms": "逗號毫秒 (,000)",
     "card.srt.chip.html": "基礎 HTML 標籤",
     "card.vtt.tagline": "W3C 網頁標準",
-    "card.vtt.desc": "專為 HTML5 `<video>` 與串流媒體 (HLS/DASH) 打造。原生支援 CSS `::cue` 樣式渲染、百分比定位與章節資訊。",
+    "card.vtt.desc": "專為 HTML5 `&lt;video&gt;` 與串流媒體 (HLS/DASH) 打造。原生支援 CSS `::cue` 樣式渲染、百分比定位與章節資訊。",
     "card.vtt.chip.header": "WEBVTT 檔頭",
     "card.vtt.chip.ms": "小數點毫秒 (.000)",
     "card.vtt.chip.css": "CSS 偽元素支援",
@@ -203,12 +203,12 @@ window.I18N['zh-TW'] = {
     "wizard.result.srt.desc": "幾乎所有社群平台 (YouTube、Facebook、IG)、非线性剪輯軟體 (Premiere Pro、DaVinci Resolve) 與 AI 語音轉文字模型 (OpenAI Whisper) 都將 SRT 作為最穩定的通用交換標準。不會因為複雜標籤造成解析錯誤。",
     "wizard.result.webvtt.badge": "唯一標準：WebVTT (.vtt)",
     "wizard.result.webvtt.title": "建議採用 HTML5 WebVTT 格式",
-    "wizard.result.webvtt.desc": "現代瀏覽器的 <video> 與 <track> 標籤僅原生支援 WebVTT。除了可以透過 CSS ::cue 統一控制網站字幕外觀，還能利用 VTT 儲存章節點 (Chapters) 與時間軸縮圖預覽 (Thumbnails)，更是 HLS / MPEG-DASH 串流封裝的標準格式。",
+    "wizard.result.webvtt.desc": "現代瀏覽器的 &lt;video&gt; 與 &lt;track&gt; 標籤僅原生支援 WebVTT。除了可以透過 CSS ::cue 統一控制網站字幕外觀，還能利用 VTT 儲存章節點 (Chapters) 與時間軸縮圖預覽 (Thumbnails)，更是 HLS / MPEG-DASH 串流封裝的標準格式。",
     "wizard.result.ass.badge": "特效首選：ASS (.ass)",
     "wizard.result.ass.title": "建議採用 Aegisub + ASS 特效字幕格式",
     "wizard.result.ass.desc": "當影片需要「雙語字幕不同字型大小」、「頂部專有名詞科普註解」、「跟隨背景招牌傾斜移動 (Typesetting)」或「KTV 卡拉 OK 逐字填色」時，SRT 與 VTT 皆無法勝任，必須使用具備獨立畫布座標與覆寫指令碼的 ASS 格式。",
     "wizard.result.assWeb.badge": "進階架構：ASS + WebAssembly",
     "wizard.result.assWeb.title": "建議採用 ASS 搭配 JASSUB / SubtitlesOctopus 網頁渲染器",
-    "wizard.result.assWeb.desc": "若不希望將 ASS 壓製成死字幕 (Hardsub) 犧牲畫質與多語切換彈性，可在網頁端載入將 C++ libass 編譯為 WebAssembly 的開源套件 (如 JASSUB)，直接於 <video> 上層覆蓋透明 <canvas> 即時算繪 ASS 特效。",
+    "wizard.result.assWeb.desc": "若不希望將 ASS 壓製成死字幕 (Hardsub) 犧牲畫質與多語切換彈性，可在網頁端載入將 C++ libass 編譯為 WebAssembly 的開源套件 (如 JASSUB)，直接於 &lt;video&gt; 上層覆蓋透明 &lt;canvas&gt; 即時算繪 ASS 特效。",
     "wizard.result.preview": "在上方沙盒預覽此格式 →"
 };

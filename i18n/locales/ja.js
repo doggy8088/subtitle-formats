@@ -42,7 +42,7 @@ window.I18N['ja'] = {
     "card.srt.chip.ms": "カンマ区切りミリ秒（,000）",
     "card.srt.chip.html": "基本的な HTML タグ",
     "card.vtt.tagline": "W3C ウェブ標準",
-    "card.vtt.desc": "HTML5 `<video>` とストリーミング（HLS/DASH）向けに設計されています。CSS `::cue` によるスタイル付きレンダリング、パーセント指定の配置、チャプター情報にネイティブ対応しています。",
+    "card.vtt.desc": "HTML5 `&lt;video&gt;` とストリーミング（HLS/DASH）向けに設計されています。CSS `::cue` によるスタイル付きレンダリング、パーセント指定の配置、チャプター情報にネイティブ対応しています。",
     "card.vtt.chip.header": "WEBVTT ヘッダー",
     "card.vtt.chip.ms": "小数点区切りミリ秒（.000）",
     "card.vtt.chip.css": "CSS 疑似要素対応",
@@ -204,12 +204,12 @@ window.I18N['ja'] = {
     "wizard.result.srt.desc": "YouTube、Facebook、IG などのほぼすべてのソーシャルプラットフォーム、ノンリニア編集ソフト（Premiere Pro、DaVinci Resolve）、AI 音声文字起こしモデル（OpenAI Whisper）は、SRT を最も安定した共通の交換フォーマットとして扱っています。複雑なタグによるパースエラーも起きません。",
     "wizard.result.webvtt.badge": "唯一の標準：WebVTT (.vtt)",
     "wizard.result.webvtt.title": "HTML5 WebVTT 形式をおすすめします",
-    "wizard.result.webvtt.desc": "モダンブラウザの <video> と <track> タグがネイティブ対応しているのは WebVTT だけです。CSS ::cue でサイト共通の字幕デザインを統一できるほか、VTT にはチャプター（Chapters）やタイムラインのサムネイルプレビュー（Thumbnails）を保存でき、HLS / MPEG-DASH のストリーミングでも標準フォーマットです。",
+    "wizard.result.webvtt.desc": "モダンブラウザの &lt;video&gt; と &lt;track&gt; タグがネイティブ対応しているのは WebVTT だけです。CSS ::cue でサイト共通の字幕デザインを統一できるほか、VTT にはチャプター（Chapters）やタイムラインのサムネイルプレビュー（Thumbnails）を保存でき、HLS / MPEG-DASH のストリーミングでも標準フォーマットです。",
     "wizard.result.ass.badge": "エフェクトの第一候補：ASS (.ass)",
     "wizard.result.ass.title": "Aegisub + ASS エフェクト字幕形式をおすすめします",
     "wizard.result.ass.desc": "動画で「二言語字幕のフォントサイズを変える」「上部に専門用語の解説を出す」「背景看板の傾きや動きに合わせる（Typesetting）」「カラオケを 1 文字ずつ塗りつぶす」などの演出が必要なときは、SRT でも VTT でも対応できません。独自のキャンバス座標とオーバーライドタグを備えた ASS 形式が必須です。",
     "wizard.result.assWeb.badge": "高度な構成：ASS + WebAssembly",
     "wizard.result.assWeb.title": "ASS は JASSUB / SubtitlesOctopus のウェブレンダラーと組み合わせるのがおすすめです",
-    "wizard.result.assWeb.desc": "ASS を焼き込み字幕（Hardsub）にして画質や多言語切り替えの自由度を失いたくない場合は、C++ の libass を WebAssembly にコンパイルしたオープンソースのパッケージ（JASSUB など）をウェブ側で読み込みます。透明な <canvas> を <video> の上に重ね、ASS エフェクトをリアルタイムにレンダリングできます。",
+    "wizard.result.assWeb.desc": "ASS を焼き込み字幕（Hardsub）にして画質や多言語切り替えの自由度を失いたくない場合は、C++ の libass を WebAssembly にコンパイルしたオープンソースのパッケージ（JASSUB など）をウェブ側で読み込みます。透明な &lt;canvas&gt; を &lt;video&gt; の上に重ね、ASS エフェクトをリアルタイムにレンダリングできます。",
     "wizard.result.preview": "このフォーマットを上のサンドボックスでプレビュー →"
 };

@@ -24,7 +24,7 @@ window.I18N['es'] = {
     "card.srt.chip.ms": "Milisegundos con coma (,000)",
     "card.srt.chip.html": "Etiquetas HTML básicas",
     "card.vtt.tagline": "Estándar web del W3C",
-    "card.vtt.desc": "Creado para HTML5 `<video>` y el streaming (HLS/DASH). Admite de forma nativa el renderizado de estilos CSS con `::cue`, el posicionamiento en porcentajes y la información de capítulos.",
+    "card.vtt.desc": "Creado para HTML5 `&lt;video&gt;` y el streaming (HLS/DASH). Admite de forma nativa el renderizado de estilos CSS con `::cue`, el posicionamiento en porcentajes y la información de capítulos.",
     "card.vtt.chip.header": "Cabecera WEBVTT",
     "card.vtt.chip.ms": "Milisegundos con punto (.000)",
     "card.vtt.chip.css": "Compatibilidad con pseudoelementos CSS",
@@ -186,12 +186,12 @@ window.I18N['es'] = {
     "wizard.result.srt.desc": "Casi todas las plataformas sociales (YouTube, Facebook, IG), los programas de edición no lineal (Premiere Pro, DaVinci Resolve) y los modelos de voz a texto con IA (OpenAI Whisper) consideran SRT el estándar de intercambio universal más estable. No provoca errores de análisis por etiquetas complejas.",
     "wizard.result.webvtt.badge": "Único estándar: WebVTT (.vtt)",
     "wizard.result.webvtt.title": "Recomendación: formato WebVTT de HTML5",
-    "wizard.result.webvtt.desc": "Las etiquetas <video> y <track> de los navegadores modernos solo admiten WebVTT de forma nativa. Además de controlar con CSS ::cue el aspecto de los subtítulos del sitio de forma unificada, VTT permite guardar puntos de capítulo (Chapters) y vistas previas en miniatura de la línea de tiempo (Thumbnails), y es el formato estándar del empaquetado de streaming HLS / MPEG-DASH.",
+    "wizard.result.webvtt.desc": "Las etiquetas &lt;video&gt; y &lt;track&gt; de los navegadores modernos solo admiten WebVTT de forma nativa. Además de controlar con CSS ::cue el aspecto de los subtítulos del sitio de forma unificada, VTT permite guardar puntos de capítulo (Chapters) y vistas previas en miniatura de la línea de tiempo (Thumbnails), y es el formato estándar del empaquetado de streaming HLS / MPEG-DASH.",
     "wizard.result.ass.badge": "Mejor para efectos: ASS (.ass)",
     "wizard.result.ass.title": "Recomendación: Aegisub + subtítulos ASS con efectos",
     "wizard.result.ass.desc": "Cuando el video necesita «subtítulos bilingües con tamaños de fuente distintos», «notas aclaratorias de términos técnicos en la parte superior», «seguir el movimiento inclinado del rótulo del fondo (Typesetting)» o «relleno de karaoke KTV letra a letra», ni SRT ni VTT sirven: hace falta el formato ASS, con su propio sistema de coordenadas de lienzo y comandos de sobrescritura.",
     "wizard.result.assWeb.badge": "Arquitectura avanzada: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Recomendación: ASS con los renderizadores web JASSUB / SubtitlesOctopus",
-    "wizard.result.assWeb.desc": "Si no quieres grabar los subtítulos ASS en el video (Hardsub) y sacrificar calidad de imagen y flexibilidad para cambiar de idioma, puedes cargar en la web un paquete de código abierto que compila libass de C++ a WebAssembly (como JASSUB) y renderizar los efectos ASS en tiempo real superponiendo un <canvas> transparente sobre el <video>.",
+    "wizard.result.assWeb.desc": "Si no quieres grabar los subtítulos ASS en el video (Hardsub) y sacrificar calidad de imagen y flexibilidad para cambiar de idioma, puedes cargar en la web un paquete de código abierto que compila libass de C++ a WebAssembly (como JASSUB) y renderizar los efectos ASS en tiempo real superponiendo un &lt;canvas&gt; transparente sobre el &lt;video&gt;.",
     "wizard.result.preview": "Ver este formato en el sandbox de arriba →"
 };

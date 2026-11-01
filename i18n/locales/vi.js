@@ -24,7 +24,7 @@ window.I18N['vi'] = {
     "card.srt.chip.ms": "Mili giây, dấu phẩy (,000)",
     "card.srt.chip.html": "Thẻ HTML cơ bản",
     "card.vtt.tagline": "Tiêu chuẩn web W3C",
-    "card.vtt.desc": "Thiết kế riêng cho `<video>` HTML5 và streaming (HLS/DASH). Hỗ trợ sẵn kiểu kết xuất CSS `::cue`, định vị theo phần trăm và thông tin chương.",
+    "card.vtt.desc": "Thiết kế riêng cho `&lt;video&gt;` HTML5 và streaming (HLS/DASH). Hỗ trợ sẵn kiểu kết xuất CSS `::cue`, định vị theo phần trăm và thông tin chương.",
     "card.vtt.chip.header": "Header WEBVTT",
     "card.vtt.chip.ms": "Mili giây, dấu chấm (.000)",
     "card.vtt.chip.css": "Hỗ trợ pseudo-element CSS",
@@ -186,12 +186,12 @@ window.I18N['vi'] = {
     "wizard.result.srt.desc": "Hầu hết nền tảng mạng xã hội (YouTube, Facebook, IG), phần mềm dựng phi tuyến tính (Premiere Pro, DaVinci Resolve) và mô hình AI chuyển giọng nói thành chữ (OpenAI Whisper) đều xem SRT là chuẩn trao đổi phổ thông ổn định nhất. Không gây lỗi phân tích cú pháp vì thẻ phức tạp.",
     "wizard.result.webvtt.badge": "Chuẩn duy nhất: WebVTT (.vtt)",
     "wizard.result.webvtt.title": "Khuyên dùng định dạng WebVTT cho HTML5",
-    "wizard.result.webvtt.desc": "Thẻ <video> và <track> trên trình duyệt hiện đại chỉ hỗ trợ nguyên bản WebVTT. Ngoài việc thống nhất giao diện phụ đề toàn trang qua CSS ::cue, bạn còn có thể dùng VTT để lưu điểm chương (Chapters) và ảnh xem trước theo dòng thời gian (Thumbnails); đây còn là định dạng chuẩn để đóng gói streaming HLS / MPEG-DASH.",
+    "wizard.result.webvtt.desc": "Thẻ &lt;video&gt; và &lt;track&gt; trên trình duyệt hiện đại chỉ hỗ trợ nguyên bản WebVTT. Ngoài việc thống nhất giao diện phụ đề toàn trang qua CSS ::cue, bạn còn có thể dùng VTT để lưu điểm chương (Chapters) và ảnh xem trước theo dòng thời gian (Thumbnails); đây còn là định dạng chuẩn để đóng gói streaming HLS / MPEG-DASH.",
     "wizard.result.ass.badge": "Ưu tiên cho hiệu ứng: ASS (.ass)",
     "wizard.result.ass.title": "Khuyên dùng Aegisub + định dạng phụ đề hiệu ứng ASS",
     "wizard.result.ass.desc": "Khi video cần “phụ đề song ngữ với cỡ chữ khác nhau”, “chú thích giải thích thuật ngữ ở đỉnh màn hình”, “bám theo biển hiệu nền nghiêng và di chuyển (Typesetting)” hay “tô màu từng chữ karaoke KTV”, cả SRT lẫn VTT đều không kham nổi; bắt buộc phải dùng định dạng ASS với tọa độ canvas riêng và lệnh ghi đè.",
     "wizard.result.assWeb.badge": "Kiến trúc nâng cao: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Khuyên dùng ASS cùng trình kết xuất web JASSUB / SubtitlesOctopus",
-    "wizard.result.assWeb.desc": "Nếu không muốn nung cứng ASS thành phụ đề chết (Hardsub) làm mất chất lượng hình ảnh và tính linh hoạt khi đổi ngôn ngữ, bạn có thể nạp phía web gói mã nguồn mở biên dịch C++ libass thành WebAssembly (như JASSUB), phủ một lớp <canvas> trong suốt ngay trên <video> để kết xuất thời gian thực các hiệu ứng ASS.",
+    "wizard.result.assWeb.desc": "Nếu không muốn nung cứng ASS thành phụ đề chết (Hardsub) làm mất chất lượng hình ảnh và tính linh hoạt khi đổi ngôn ngữ, bạn có thể nạp phía web gói mã nguồn mở biên dịch C++ libass thành WebAssembly (như JASSUB), phủ một lớp &lt;canvas&gt; trong suốt ngay trên &lt;video&gt; để kết xuất thời gian thực các hiệu ứng ASS.",
     "wizard.result.preview": "Xem trước định dạng này trong sandbox phía trên →"
 };

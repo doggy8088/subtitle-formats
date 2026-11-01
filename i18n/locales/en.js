@@ -24,7 +24,7 @@ window.I18N['en'] = {
     "card.srt.chip.ms": "Comma milliseconds (,000)",
     "card.srt.chip.html": "Basic HTML tags",
     "card.vtt.tagline": "W3C web standard",
-    "card.vtt.desc": "Built for HTML5 `<video>` and streaming (HLS/DASH). Natively supports CSS `::cue` styling, percentage positioning, and chapter metadata.",
+    "card.vtt.desc": "Built for HTML5 `&lt;video&gt;` and streaming (HLS/DASH). Natively supports CSS `::cue` styling, percentage positioning, and chapter metadata.",
     "card.vtt.chip.header": "WEBVTT header",
     "card.vtt.chip.ms": "Dot milliseconds (.000)",
     "card.vtt.chip.css": "CSS pseudo-element support",
@@ -186,12 +186,12 @@ window.I18N['en'] = {
     "wizard.result.srt.desc": "Nearly every social platform (YouTube, Facebook, IG), nonlinear editor (Premiere Pro, DaVinci Resolve), and speech-to-text model (OpenAI Whisper) treats SRT as the most reliable interchange format. No complex tags means no parse errors.",
     "wizard.result.webvtt.badge": "The only standard: WebVTT (.vtt)",
     "wizard.result.webvtt.title": "Use the HTML5 WebVTT format",
-    "wizard.result.webvtt.desc": "The <video> and <track> tags in modern browsers natively support WebVTT only. CSS ::cue gives you one place to control your site's subtitle look, VTT stores chapter points (Chapters) and timeline thumbnail previews (Thumbnails), and it is the standard packaging format for HLS / MPEG-DASH streaming.",
+    "wizard.result.webvtt.desc": "The &lt;video&gt; and &lt;track&gt; tags in modern browsers natively support WebVTT only. CSS ::cue gives you one place to control your site's subtitle look, VTT stores chapter points (Chapters) and timeline thumbnail previews (Thumbnails), and it is the standard packaging format for HLS / MPEG-DASH streaming.",
     "wizard.result.ass.badge": "Top pick for effects: ASS (.ass)",
     "wizard.result.ass.title": "Use Aegisub + the ASS effects format",
     "wizard.result.ass.desc": "Bilingual lines at different font sizes, terminology notes up top, tilted sign typesetting that tracks the background (Typesetting), or KTV per-character fills — SRT and VTT can't do any of it. You need ASS with its own canvas coordinates and override tags.",
     "wizard.result.assWeb.badge": "Advanced setup: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Use ASS with JASSUB / SubtitlesOctopus as the web renderer",
-    "wizard.result.assWeb.desc": "If you'd rather not burn ASS in as a hardsub — losing picture quality and language switching — load an open-source C++ libass compiled to WebAssembly (like JASSUB) and render ASS live on a transparent <canvas> layered over <video>.",
+    "wizard.result.assWeb.desc": "If you'd rather not burn ASS in as a hardsub — losing picture quality and language switching — load an open-source C++ libass compiled to WebAssembly (like JASSUB) and render ASS live on a transparent &lt;canvas&gt; layered over &lt;video&gt;.",
     "wizard.result.preview": "Preview this format in the sandbox above →"
 };

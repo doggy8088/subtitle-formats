@@ -24,7 +24,7 @@ window.I18N['ko'] = {
     "card.srt.chip.ms": "쉼표 밀리초 (,000)",
     "card.srt.chip.html": "기본 HTML 태그",
     "card.vtt.tagline": "W3C 웹 표준",
-    "card.vtt.desc": "HTML5 `<video>`와 스트리밍(HLS/DASH)을 위해 설계되었습니다. CSS `::cue` 스타일 렌더링, 백분율 위치 지정, 챕터 정보를 네이티브로 지원합니다.",
+    "card.vtt.desc": "HTML5 `&lt;video&gt;`와 스트리밍(HLS/DASH)을 위해 설계되었습니다. CSS `::cue` 스타일 렌더링, 백분율 위치 지정, 챕터 정보를 네이티브로 지원합니다.",
     "card.vtt.chip.header": "WEBVTT 헤더",
     "card.vtt.chip.ms": "소수점 밀리초 (.000)",
     "card.vtt.chip.css": "CSS 의사요소 지원",
@@ -186,12 +186,12 @@ window.I18N['ko'] = {
     "wizard.result.srt.desc": "거의 모든 소셜 미디어 플랫폼(YouTube, Facebook, IG), 비선형 편집 프로그램(Premiere Pro, DaVinci Resolve), AI 음성-텍스트 모델(OpenAI Whisper)이 SRT를 가장 안정적인 공용 교환 표준으로 사용합니다. 복잡한 태그 때문에 파싱 오류가 발생할 일도 없습니다.",
     "wizard.result.webvtt.badge": "유일한 표준: WebVTT (.vtt)",
     "wizard.result.webvtt.title": "HTML5 WebVTT 포맷을 권장합니다",
-    "wizard.result.webvtt.desc": "최신 브라우저의 <video>와 <track> 태그는 WebVTT만 네이티브로 지원합니다. CSS ::cue로 사이트 전체의 자막 모양을 통일할 수 있고, VTT에는 챕터 (Chapters)와 타임라인 썸네일 미리보기 (Thumbnails)를 저장할 수도 있으며, HLS / MPEG-DASH 스트리밍 패키징의 표준 포맷이기도 합니다.",
+    "wizard.result.webvtt.desc": "최신 브라우저의 &lt;video&gt;와 &lt;track&gt; 태그는 WebVTT만 네이티브로 지원합니다. CSS ::cue로 사이트 전체의 자막 모양을 통일할 수 있고, VTT에는 챕터 (Chapters)와 타임라인 썸네일 미리보기 (Thumbnails)를 저장할 수도 있으며, HLS / MPEG-DASH 스트리밍 패키징의 표준 포맷이기도 합니다.",
     "wizard.result.ass.badge": "이펙트 최적: ASS (.ass)",
     "wizard.result.ass.title": "Aegisub + ASS 이펙트 자막 포맷을 권장합니다",
     "wizard.result.ass.desc": "영상에 “이중 자막 글꼴 크기 분리”, “상단 고유명사 설명 주석”, “배경 간판의 기울어짐에 맞춘 연출 (Typesetting)”, “KTV 가라오케 글자별 색상 채움”이 필요할 때는 SRT와 VTT로는 감당할 수 없습니다. 독립 캔버스 좌표계와 오버라이드 명령 스크립트를 갖춘 ASS 포맷을 사용해야 합니다.",
     "wizard.result.assWeb.badge": "고급 아키텍처: ASS + WebAssembly",
     "wizard.result.assWeb.title": "ASS + JASSUB / SubtitlesOctopus 웹 렌더러를 권장합니다",
-    "wizard.result.assWeb.desc": "ASS를 고정 자막(Hardsub)으로 굽어 화질과 다중 언어 전환 유연성을 희생하고 싶지 않다면, C++ libass를 WebAssembly로 컴파일한 오픈 소스 패키지 (예: JASSUB)를 웹에서 불러올 수 있습니다. <video> 위에 투명 <canvas>를 덮어 ASS 이펙트를 실시간으로 렌더링합니다.",
+    "wizard.result.assWeb.desc": "ASS를 고정 자막(Hardsub)으로 굽어 화질과 다중 언어 전환 유연성을 희생하고 싶지 않다면, C++ libass를 WebAssembly로 컴파일한 오픈 소스 패키지 (예: JASSUB)를 웹에서 불러올 수 있습니다. &lt;video&gt; 위에 투명 &lt;canvas&gt;를 덮어 ASS 이펙트를 실시간으로 렌더링합니다.",
     "wizard.result.preview": "위의 샌드박스에서 이 포맷을 미리보기 →"
 };

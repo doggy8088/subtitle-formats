@@ -24,7 +24,7 @@ window.I18N['id'] = {
     "card.srt.chip.ms": "Koma milidetik (,000)",
     "card.srt.chip.html": "Tag HTML dasar",
     "card.vtt.tagline": "Standar web W3C",
-    "card.vtt.desc": "Dirancang khusus untuk `<video>` HTML5 dan streaming (HLS/DASH). Mendukung render gaya CSS `::cue`, penempatan berbasis persentase, dan informasi bab secara native.",
+    "card.vtt.desc": "Dirancang khusus untuk `&lt;video&gt;` HTML5 dan streaming (HLS/DASH). Mendukung render gaya CSS `::cue`, penempatan berbasis persentase, dan informasi bab secara native.",
     "card.vtt.chip.header": "Header WEBVTT",
     "card.vtt.chip.ms": "Titik milidetik (.000)",
     "card.vtt.chip.css": "Dukungan pseudoelemen CSS",
@@ -186,12 +186,12 @@ window.I18N['id'] = {
     "wizard.result.srt.desc": "Hampir semua platform sosial (YouTube, Facebook, IG), editor video nonlinier (Premiere Pro, DaVinci Resolve), dan model AI speech-to-text (OpenAI Whisper) memakai SRT sebagai standar pertukaran universal paling stabil. Tidak akan terjadi galat parsing karena tag yang rumit.",
     "wizard.result.webvtt.badge": "Standar tunggal: WebVTT (.vtt)",
     "wizard.result.webvtt.title": "Disarankan memakai format HTML5 WebVTT",
-    "wizard.result.webvtt.desc": "Tag <video> dan <track> di browser modern hanya mendukung WebVTT secara native. Selain bisa menyeragamkan tampilan subtitle situs lewat CSS ::cue, VTT juga bisa menyimpan penanda bab (Chapters) dan pratinjau gambar mini timeline (Thumbnails), sekaligus menjadi format standar pemaketan streaming HLS / MPEG-DASH.",
+    "wizard.result.webvtt.desc": "Tag &lt;video&gt; dan &lt;track&gt; di browser modern hanya mendukung WebVTT secara native. Selain bisa menyeragamkan tampilan subtitle situs lewat CSS ::cue, VTT juga bisa menyimpan penanda bab (Chapters) dan pratinjau gambar mini timeline (Thumbnails), sekaligus menjadi format standar pemaketan streaming HLS / MPEG-DASH.",
     "wizard.result.ass.badge": "Pilihan utama untuk efek: ASS (.ass)",
     "wizard.result.ass.title": "Disarankan memakai Aegisub + format subtitle efek ASS",
     "wizard.result.ass.desc": "Ketika video butuh “subtitle dwibahasa dengan ukuran font berbeda”, “catatan istilah di bagian atas”, “teks ikut bergerak miring mengikuti papan nama latar (Typesetting)”, atau “pengisian warna karaoke KTV per kata”, SRT dan VTT tak memadai; Anda harus memakai format ASS dengan koordinat kanvas mandiri dan skrip override.",
     "wizard.result.assWeb.badge": "Arsitektur lanjutan: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Disarankan memakai ASS bersama renderer web JASSUB / SubtitlesOctopus",
-    "wizard.result.assWeb.desc": "Jika tidak ingin menge-hardsub ASS menjadi subtitle mati (Hardsub) yang mengorbankan kualitas gambar dan fleksibilitas berganti bahasa, muat paket open source kompilasi C++ libass ke WebAssembly (seperti JASSUB) di sisi web, lalu letakkan <canvas> transparan di atas <video> untuk me-render efek ASS secara langsung.",
+    "wizard.result.assWeb.desc": "Jika tidak ingin menge-hardsub ASS menjadi subtitle mati (Hardsub) yang mengorbankan kualitas gambar dan fleksibilitas berganti bahasa, muat paket open source kompilasi C++ libass ke WebAssembly (seperti JASSUB) di sisi web, lalu letakkan &lt;canvas&gt; transparan di atas &lt;video&gt; untuk me-render efek ASS secara langsung.",
     "wizard.result.preview": "Pratinjau format ini di sandbox di atas →"
 };

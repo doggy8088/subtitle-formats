@@ -19,7 +19,7 @@ window.I18N['de'] = {
     "card.srt.chip.ms": "Millisekunden mit Komma (,000)",
     "card.srt.chip.html": "Einfache HTML-Tags",
     "card.vtt.tagline": "W3C-Webstandard",
-    "card.vtt.desc": "Speziell für HTML5 `<video>` und Streaming (HLS/DASH) gebaut. Nativ unterstützt: CSS-Rendering via `::cue`, Prozent-Positionierung und Kapitelinformationen.",
+    "card.vtt.desc": "Speziell für HTML5 `&lt;video&gt;` und Streaming (HLS/DASH) gebaut. Nativ unterstützt: CSS-Rendering via `::cue`, Prozent-Positionierung und Kapitelinformationen.",
     "card.vtt.chip.header": "WEBVTT-Dateikopf",
     "card.vtt.chip.ms": "Millisekunden mit Punkt (.000)",
     "card.vtt.chip.css": "CSS-Pseudoelemente",
@@ -177,12 +177,12 @@ window.I18N['de'] = {
     "wizard.result.srt.desc": "Nahezu alle Social-Media-Plattformen (YouTube, Facebook, IG), nichtlineare Schnittsoftware (Premiere Pro, DaVinci Resolve) und KI-Spracherkennungsmodelle (OpenAI Whisper) behandeln SRT als stabilstes allgemeines Austauschformat. Komplexe Tags können die Verarbeitung nicht zum Absturz bringen.",
     "wizard.result.webvtt.badge": "Einziger Standard: WebVTT (.vtt)",
     "wizard.result.webvtt.title": "Empfehlung: das HTML5-WebVTT-Format",
-    "wizard.result.webvtt.desc": "Die Tags <video> und <track> moderner Browser unterstützen nativ nur WebVTT. Über CSS ::cue lässt sich das Untertitel-Design der ganzen Seite einheitlich steuern; in VTT lassen sich zusätzlich Kapitelmarken (Chapters) und Zeitachsen-Vorschaubilder (Thumbnails) speichern. Außerdem ist es das Standardformat für HLS / MPEG-DASH-Streaming.",
+    "wizard.result.webvtt.desc": "Die Tags &lt;video&gt; und &lt;track&gt; moderner Browser unterstützen nativ nur WebVTT. Über CSS ::cue lässt sich das Untertitel-Design der ganzen Seite einheitlich steuern; in VTT lassen sich zusätzlich Kapitelmarken (Chapters) und Zeitachsen-Vorschaubilder (Thumbnails) speichern. Außerdem ist es das Standardformat für HLS / MPEG-DASH-Streaming.",
     "wizard.result.ass.badge": "Erste Wahl für Effekte: ASS (.ass)",
     "wizard.result.ass.title": "Empfehlung: Aegisub + ASS-Effektuntertitel",
     "wizard.result.ass.desc": "Sobald ein Video „Untertitel in zwei Schriftgrößen für zwei Sprachen“, „erklärende Fachbegriffe oben im Bild“, „schräges Mitwandern am Hintergrundschild (Typesetting)“ oder „KTV-Karaoke mit Einfärben Zeichen für Zeichen“ braucht, sind SRT und VTT überfordert. Dann ist ASS mit eigenem Bühnenkoordinatensystem und Override-Befehlen Pflicht.",
     "wizard.result.assWeb.badge": "Fortgeschrittenes Setup: ASS + WebAssembly",
     "wizard.result.assWeb.title": "Empfehlung: ASS mit JASSUB / SubtitlesOctopus im Browser rendern",
-    "wizard.result.assWeb.desc": "Damit ASS nicht fest ins Bild eingebrannt wird (Hardsub) und Bildqualität sowie Sprachumschaltung verloren gehen, lässt sich im Browser ein quelloffenes Paket laden, das C++ libass als WebAssembly kompiliert (z. B. JASSUB). Ein transparentes <canvas> über <video> rendert die ASS-Effekte dann live.",
+    "wizard.result.assWeb.desc": "Damit ASS nicht fest ins Bild eingebrannt wird (Hardsub) und Bildqualität sowie Sprachumschaltung verloren gehen, lässt sich im Browser ein quelloffenes Paket laden, das C++ libass als WebAssembly kompiliert (z. B. JASSUB). Ein transparentes &lt;canvas&gt; über &lt;video&gt; rendert die ASS-Effekte dann live.",
     "wizard.result.preview": "Dieses Format oben in der Sandbox vorab testen →"
 };
