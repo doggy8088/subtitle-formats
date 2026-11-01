@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRT vs VTT vs ASS — 互動式字幕格式全解析</title>
+
+    <!-- SEO -->
+    <meta name="description" content="互動式字幕格式全解析：SRT、WebVTT、ASS/SSA 的語法結構、即時渲染預覽、規格對比矩陣與選型決策器，帶你一次看懂三種字幕格式的差異，並快速選出最適合專案的方案。">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0b0f19">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23f59e0b'/%3E%3Cstop%20offset='.5'%20stop-color='%230ea5e9'/%3E%3Cstop%20offset='1'%20stop-color='%23a855f7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20x='2'%20y='2'%20width='60'%20height='60'%20rx='14'%20fill='url(%23g)'/%3E%3Crect%20x='6'%20y='6'%20width='52'%20height='52'%20rx='10'%20fill='%23020617'/%3E%3Ctext%20x='32'%20y='43'%20font-family='monospace'%20font-size='26'%20font-weight='700'%20text-anchor='middle'%20fill='%23ffffff'%3ECC%3C/text%3E%3C/svg%3E">
+
+    <!-- Open Graph -->
+    <!-- 尚未部署：待部署網址確定後，請補上絕對網址的 og:url、<link rel="canonical"> 與 og:image 絕對網址；目前 og:image 以相對路徑對頁面 URL 解析。 -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="影片字幕格式互動實驗室">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:title" content="SRT vs VTT vs ASS — 互動式字幕格式全解析">
+    <meta property="og:description" content="互動式字幕格式全解析：SRT、WebVTT、ASS/SSA 的語法結構、即時渲染預覽、規格對比矩陣與選型決策器，帶你一次看懂三種字幕格式的差異，並快速選出最適合專案的方案。">
+    <meta property="og:image" content="assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="影片字幕格式互動實驗室社群分享卡片：SRT、WebVTT、ASS 三種字幕格式比較總覽">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SRT vs VTT vs ASS — 互動式字幕格式全解析">
+    <meta name="twitter:description" content="互動式字幕格式全解析：SRT、WebVTT、ASS/SSA 的語法結構、即時渲染預覽、規格對比矩陣與選型決策器，帶你一次看懂三種字幕格式的差異，並快速選出最適合專案的方案。">
+    <meta name="twitter:image" content="assets/og-image.png">
+    <meta name="twitter:image:alt" content="影片字幕格式互動實驗室社群分享卡片：SRT、WebVTT、ASS 三種字幕格式比較總覽">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": "#webpage",
+                "name": "SRT vs VTT vs ASS — 互動式字幕格式全解析",
+                "description": "互動式字幕格式全解析：SRT、WebVTT、ASS/SSA 的語法結構、即時渲染預覽、規格對比矩陣與選型決策器，帶你一次看懂三種字幕格式的差異，並快速選出最適合專案的方案。",
+                "inLanguage": "zh-TW",
+                "primaryImageOfPage": {
+                    "@type": "ImageObject",
+                    "url": "assets/og-image.png",
+                    "width": 1200,
+                    "height": 630
+                }
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "即時沙盒預覽",
+                        "item": "#sandbox"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "規格對比矩陣",
+                        "item": "#matrix"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": "色彩與時間軸轉換",
+                        "item": "#converter"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 4,
+                        "name": "選型決策器",
+                        "item": "#wizard"
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        srt: { light: '#fef3c7', DEFAULT: '#f59e0b', dark: '#b45309' },
+                        vtt: { light: '#e0f2fe', DEFAULT: '#0ea5e9', dark: '#0369a1' },
+                        ass: { light: '#f3e8ff', DEFAULT: '#a855f7', dark: '#7e22ce' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Simulated Video Canvas Background */
+        .video-stage {
+            background: radial-gradient(circle at 50% 35%, #1e293b 0%, #090d16 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animated background grid inside video player */
+        .stage-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+
+        /* ASS Text Stroke Effect */
+        .ass-stroke {
+            text-shadow: 
+                -2px -2px 0 var(--ass-outline, #000),  
+                 2px -2px 0 var(--ass-outline, #000),
+                -2px  2px 0 var(--ass-outline, #000),
+                 2px  2px 0 var(--ass-outline, #000),
+                 0px  3px 6px rgba(0,0,0,0.85);
+        }
+
+        /* Karaoke Fill Animation */
+        @keyframes karaokeSweep {
+            0% { background-position: 100% 0; }
+            50% { background-position: 0% 0; }
+            100% { background-position: 0% 0; }
+        }
+        .karaoke-text {
+            background: linear-gradient(to right, #fde047 50%, #ffffff 50%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: karaokeSweep 3s infinite ease-in-out;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.95));
+        }
+
+        /* Syntax Highlighting Colors */
+        .syn-header { color: #f472b6; font-weight: 600; }
+        .syn-time { color: #38bdf8; }
+        .syn-tag { color: #c084fc; }
+        .syn-num { color: #fbbf24; }
+        .syn-comment { color: #64748b; font-style: italic; }
+        .syn-key { color: #2dd4bf; }
+    </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-indigo-500 selection:text-white pb-16">
+
+    <!-- Top Navigation / Header -->
+    <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 via-sky-500 to-purple-600 p-0.5 shadow-lg shadow-purple-500/20">
+                    <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center font-mono font-bold text-sm tracking-tighter text-white">
+                        CC
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        影片字幕格式互動實驗室
+                        <span class="text-xs font-mono uppercase px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">SRT / VTT / ASS</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">即時預覽渲染效果、語法結構拆解與規格比較表</p>
+                </div>
+            </div>
+
+            <!-- Quick Navigation Pills -->
+            <nav class="flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-xl border border-slate-800 self-stretch sm:self-auto justify-center">
+                <a href="#sandbox" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800 transition">即時沙盒預覽</a>
+                <a href="#matrix" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800 transition">規格對比矩陣</a>
+                <a href="#converter" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800 transition">色彩與時間軸轉換</a>
+                <a href="#wizard" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-200 hover:bg-slate-800 transition">選型決策器</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-14">
+
+        <!-- SECTION 1:Format Overview Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- SRT Card -->
+            <div onclick="selectFormat('srt')" id="card-srt" class="cursor-pointer group relative rounded-2xl p-5 bg-slate-900/90 border-2 border-amber-500/80 shadow-lg shadow-amber-500/5 transition-all duration-200 hover:-translate-y-0.5">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">.SRT</span>
+                    <span class="text-xs text-slate-400 font-medium">相容性之王</span>
+                </div>
+                <h2 class="text-lg font-bold text-white mb-1 group-hover:text-amber-400 transition">SubRip Subtitle</h2>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">結構最精簡的純文字字幕。幾乎所有剪輯軟體、社群影音平台與 AI 語音辨識工具皆將其列為第一預設格式。</p>
+                <div class="flex flex-wrap gap-1.5 mt-auto">
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">純文字無檔頭</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">逗號毫秒 (,000)</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">基礎 HTML 標籤</span>
+                </div>
+            </div>
+
+            <!-- VTT Card -->
+            <div onclick="selectFormat('vtt')" id="card-vtt" class="cursor-pointer group relative rounded-2xl p-5 bg-slate-900/60 border border-slate-800 hover:border-sky-500/50 transition-all duration-200 hover:-translate-y-0.5">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">.VTT</span>
+                    <span class="text-xs text-slate-400 font-medium">W3C 網頁標準</span>
+                </div>
+                <h2 class="text-lg font-bold text-white mb-1 group-hover:text-sky-400 transition">WebVTT</h2>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">專為 HTML5 `<video>` 與串流媒體 (HLS/DASH) 打造。原生支援 CSS `::cue` 樣式渲染、百分比定位與章節資訊。</p>
+                <div class="flex flex-wrap gap-1.5 mt-auto">
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">WEBVTT 檔頭</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">小數點毫秒 (.000)</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">CSS 偽元素支援</span>
+                </div>
+            </div>
+
+            <!-- ASS Card -->
+            <div onclick="selectFormat('ass')" id="card-ass" class="cursor-pointer group relative rounded-2xl p-5 bg-slate-900/60 border border-slate-800 hover:border-purple-500/50 transition-all duration-200 hover:-translate-y-0.5">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">.ASS</span>
+                    <span class="text-xs text-slate-400 font-medium">特效排版引擎</span>
+                </div>
+                <h2 class="text-lg font-bold text-white mb-1 group-hover:text-purple-400 transition">Advanced SubStation Alpha</h2>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">動漫字幕組與 KTV 伴唱標準。具備獨立座標系統、多重描邊、動態移動軌跡 (`\move`)、卡拉 OK 與向量繪圖能力。</p>
+                <div class="flex flex-wrap gap-1.5 mt-auto">
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">INI 區段結構</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">厘秒精度 (.00)</span>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">像素級動態特效</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Interactive Live Sandbox & Renderer -->
+        <section id="sandbox" class="scroll-mt-20">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 gap-2">
+                <div>
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <span>即時沙盒：視覺渲染與原始碼連動</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">切換上方格式或調整下方控制項，觀察畫面字幕變化與對應的真實語法差異</p>
+                </div>
+
+                <!-- Format Switcher Tabs -->
+                <div class="inline-flex p-1 rounded-xl bg-slate-900 border border-slate-800 self-start">
+                    <button onclick="selectFormat('srt')" id="tab-srt" class="px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition bg-amber-500 text-slate-950 shadow">SRT 模式</button>
+                    <button onclick="selectFormat('vtt')" id="tab-vtt" class="px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition text-slate-400 hover:text-white">WebVTT 模式</button>
+                    <button onclick="selectFormat('ass')" id="tab-ass" class="px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition text-slate-400 hover:text-white">ASS 特效模式</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                
+                <!-- Left Column: Simulated Video Player + Parameter Controls (7 cols) -->
+                <div class="lg:col-span-7 flex flex-col gap-4">
+                    
+                    <!-- Simulated 16:9 Video Frame -->
+                    <div class="video-stage aspect-video w-full rounded-2xl border border-slate-800 shadow-2xl flex flex-col justify-between select-none" id="video-canvas">
+                        <div class="stage-grid absolute inset-0 pointer-events-none"></div>
+
+                        <!-- Top Bar inside Video (Resolution / Format HUD) -->
+                        <div class="relative z-10 flex items-center justify-between px-4 py-3 bg-gradient-to-b from-black/70 to-transparent text-xs font-mono">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span id="hud-renderer" class="text-slate-200 font-semibold">Renderer: Native OS / Basic Player</span>
+                            </div>
+                            <div id="hud-coords" class="text-slate-400 bg-slate-900/80 px-2.5 py-1 rounded border border-slate-700/60">
+                                Bottom-Center (Default)
+                            </div>
+                        </div>
+
+                        <!-- Decorative Scene Elements (Anime/Movie Mock Scene) -->
+                        <div class="relative z-0 my-auto flex flex-col items-center justify-center pointer-events-none opacity-35 px-6 text-center">
+                            <svg class="w-16 h-16 text-slate-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="text-xs font-mono tracking-widest uppercase text-slate-400">1920 × 1080 模擬畫面畫布</span>
+                        </div>
+
+                        <!-- Background Signboard Mock (Only visible in ASS mode to demonstrate typesetting) -->
+                        <div id="ass-signboard" class="hidden absolute top-14 left-8 z-10 transform -rotate-6 bg-indigo-950/90 border-2 border-indigo-400/60 px-3 py-1.5 rounded shadow-lg">
+                            <div class="text-[10px] font-mono text-indigo-300 uppercase tracking-wider">\\pos(240,160) \\frz6</div>
+                            <div class="text-xs font-bold text-white tracking-widest">東京車站・八重洲口</div>
+                        </div>
+
+                        <!-- Dynamic Subtitle Overlay Container -->
+                        <div id="subtitle-wrapper" class="absolute inset-0 pointer-events-none flex flex-col items-center justify-end p-6 transition-all duration-300">
+                            <div id="subtitle-box" class="text-center transition-all duration-200 px-3 py-1 rounded">
+                                <div id="sub-line-1" class="text-lg sm:text-xl md:text-2xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
+                                    這是第一行範例對白字幕
+                                </div>
+                                <div id="sub-line-2" class="text-base sm:text-lg md:text-xl font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] mt-0.5">
+                                    搭配<span id="sub-highlight" class="font-bold">重點強調樣式</span>的第二行文字
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Player Fake Timeline Bar -->
+                        <div class="relative z-10 px-4 py-2.5 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-center gap-3 text-xs font-mono text-slate-300">
+                            <span>00:01:20</span>
+                            <div class="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden relative">
+                                <div class="w-1/3 h-full bg-indigo-500 rounded-full"></div>
+                            </div>
+                            <span>00:04:50</span>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Parameter Controls -->
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                                調整字幕屬性與特效參數
+                            </span>
+                            <span id="control-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">目前模式：SRT</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Editable Text Input -->
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1.5">自訂第一行台詞文字</label>
+                                <input type="text" id="input-text" value="這是第一行範例對白字幕" oninput="updateSandbox()" 
+                                    class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500">
+                            </div>
+
+                            <!-- Vertical Position Control -->
+                            <div>
+                                <div class="flex justify-between text-xs mb-1.5">
+                                    <span class="text-slate-400">垂直位置 / 對齊</span>
+                                    <span id="pos-label" class="font-mono text-indigo-400">底部預設</span>
+                                </div>
+                                <select id="input-pos" onchange="updateSandbox()" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-indigo-500">
+                                    <option value="bottom">底部居中 (預設對白位置)</option>
+                                    <option value="top">頂部居中 (註釋 / 雙語上方)</option>
+                                    <option value="center">畫面正中央 (標題 / 強調)</option>
+                                </select>
+                            </div>
+
+                            <!-- Highlight Color Picker -->
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1.5">重點文字顏色 (自動轉換語法色碼)</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="color" id="input-color" value="#fde047" oninput="updateSandbox()" class="w-10 h-9 rounded-lg bg-slate-950 border border-slate-700 cursor-pointer p-0.5">
+                                    <span id="color-code-display" class="text-xs font-mono text-slate-300 bg-slate-950 px-2.5 py-2 rounded-xl border border-slate-800 flex-1">
+                                        HEX: #FDE047
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Format-Specific Special Toggle -->
+                            <div>
+                                <label class="block text-xs text-slate-400 mb-1.5">進階特效開關 (依格式支援度解鎖)</label>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="toggleSpecialEffect()" id="btn-special" class="w-full py-2 px-3 rounded-xl text-xs font-semibold border transition flex items-center justify-center gap-2 bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700">
+                                        <span id="special-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                        <span id="special-btn-text">開啟 ASS 招牌定位與卡拉 OK</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Format Limitation Notice Box -->
+                        <div id="limitation-notice" class="rounded-xl p-3 bg-amber-950/40 border border-amber-500/30 text-xs text-amber-200/90 flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div id="limitation-text">
+                                <strong>SRT 渲染限制：</strong> 官方標準僅支援純文字。雖然許多本地播放器 (如 PotPlayer、VLC) 允許借用 <code>&lt;font color&gt;</code> 或 ASS 的 <code>{\an8}</code> 強制置頂，但在網頁或電視盒上常會直接把標籤當成文字印出來。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Live Generated Code & Syntax Anatomy (5 cols) -->
+                <div class="lg:col-span-5 flex flex-col bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                    <!-- Code Header -->
+                    <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                            <span id="code-filename" class="ml-2 text-xs font-mono text-slate-300 font-semibold">subtitle_sample.srt</span>
+                        </div>
+                        <button onclick="copyCode()" id="btn-copy" class="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            <span>複製原始碼</span>
+                        </button>
+                    </div>
+
+                    <!-- Live Code Display -->
+                    <div class="p-4 font-mono text-xs sm:text-[13px] leading-relaxed overflow-x-auto flex-1 bg-slate-950/60 select-all" id="code-output">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- Syntax Anatomy Breakdown -->
+                    <div class="p-4 bg-slate-900 border-t border-slate-800 space-y-2.5">
+                        <div class="text-xs font-bold uppercase tracking-wider text-slate-400">語法結構重點剖析</div>
+                        <div id="syntax-anatomy" class="space-y-2 text-xs text-slate-300">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: Interactive Comparison Matrix -->
+        <section id="matrix" class="scroll-mt-20 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-xl font-bold text-white">全方位規格對比矩陣</h3>
+                    <p class="text-xs text-slate-400 mt-1">點擊上方分類標籤可篩選您關心的技術維度</p>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-1.5">
+                    <button onclick="filterTable('all')" class="filter-btn active-filter px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white transition" data-cat="all">全部顯示 (10)</button>
+                    <button onclick="filterTable('syntax')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition" data-cat="syntax">檔案與語法結構</button>
+                    <button onclick="filterTable('visual')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition" data-cat="visual">視覺排版與特效</button>
+                    <button onclick="filterTable('ecosystem')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition" data-cat="ecosystem">瀏覽器與生態系</button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/70 shadow-xl">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-950/90 text-xs uppercase font-mono">
+                            <th class="py-4 px-5 text-slate-400 w-1/5">評估維度</th>
+                            <th class="py-4 px-5 text-amber-400 w-1/4 border-l border-slate-800/80">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                                    SRT (SubRip)
+                                </div>
+                            </th>
+                            <th class="py-4 px-5 text-sky-400 w-1/4 border-l border-slate-800/80">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                                    WebVTT (.vtt)
+                                </div>
+                            </th>
+                            <th class="py-4 px-5 text-purple-400 w-3/10 border-l border-slate-800/80">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                                    ASS (Advanced SubStation)
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/70 text-xs sm:text-sm" id="comparison-tbody">
+                        <tr data-category="ecosystem" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">核心定位</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">最基礎、跨平台相容性最高的純文字格式</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">HTML5 網頁影音、串流媒體與無障礙標準</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">動漫字幕組、KTV 伴唱與高強度特效排版引擎</td>
+                        </tr>
+                        <tr data-category="syntax" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">時間軸精度與格式</td>
+                            <td class="py-3.5 px-5 border-l border-slate-800/80">
+                                <span class="text-amber-300 font-mono text-xs bg-amber-950/60 px-2 py-0.5 rounded border border-amber-500/30">00:01:20,500</span>
+                                <div class="text-xs text-slate-400 mt-1">毫秒 (3位數)，強制以<strong>逗號</strong>分隔</div>
+                            </td>
+                            <td class="py-3.5 px-5 border-l border-slate-800/80">
+                                <span class="text-sky-300 font-mono text-xs bg-sky-950/60 px-2 py-0.5 rounded border border-sky-500/30">00:01:20.500</span>
+                                <div class="text-xs text-slate-400 mt-1">毫秒 (3位數)，強制以<strong>小數點</strong>分隔</div>
+                            </td>
+                            <td class="py-3.5 px-5 border-l border-slate-800/80">
+                                <span class="text-purple-300 font-mono text-xs bg-purple-950/60 px-2 py-0.5 rounded border border-purple-500/30">0:01:20.50</span>
+                                <div class="text-xs text-slate-400 mt-1">厘秒 (2位數，1/100秒)，小時為 1 位數</div>
+                            </td>
+                        </tr>
+                        <tr data-category="syntax" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">必備檔頭 (Header)</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">無檔頭，直接由第一行序號 <code class="text-amber-300">1</code> 開始</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">首行必須為 <code class="text-sky-300">WEBVTT</code>，否則瀏覽器拒絕解析</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">必須具備 <code class="text-purple-300">[Script Info]</code>、<code class="text-purple-300">[V4+ Styles]</code> 與 <code class="text-purple-300">[Events]</code></td>
+                        </tr>
+                        <tr data-category="syntax" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">序號與換行規則</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">必填遞增序號；文字直接 Enter 斷行</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">序號選填 (可作 Cue ID)；文字直接 Enter 斷行</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">無序號，每句單行以 <code class="text-purple-300">Dialogue:</code> 開頭，換行需寫 <code class="text-purple-300">\N</code></td>
+                        </tr>
+                        <tr data-category="visual" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">樣式與字體控制</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">
+                                <span class="inline-block px-2 py-0.5 rounded text-[11px] bg-slate-800 text-slate-400 mb-1">極低</span><br>
+                                非官方擴充支援 <code class="text-xs">&lt;b&gt;</code>, <code class="text-xs">&lt;i&gt;</code>, <code class="text-xs">&lt;font color&gt;</code>
+                            </td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">
+                                <span class="inline-block px-2 py-0.5 rounded text-[11px] bg-sky-950 text-sky-300 mb-1">中高 (CSS 驅動)</span><br>
+                                支援外部或內嵌 <code class="text-xs">::cue</code> CSS 規則、背景框、字體與顏色
+                            </td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">
+                                <span class="inline-block px-2 py-0.5 rounded text-[11px] bg-purple-950 text-purple-300 mb-1">極高 (像素級控制)</span><br>
+                                多重邊框、陰影、漸層、3D 旋轉 (<code class="text-xs">\frx\fry\frz</code>)、模糊與字體內嵌
+                            </td>
+                        </tr>
+                        <tr data-category="visual" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">畫面座標與定位</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">無標準支援 (部分播放器相容 <code class="text-xs">{\an8}</code> 九宮格語法)</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">支援百分比定位 (<code class="text-xs">line:85% position:50%</code>) 與直書 (<code class="text-xs">vertical:rl</code>)</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">依 <code class="text-xs">PlayResX/Y</code> 絕對像素座標 (<code class="text-xs">\pos(x,y)</code>)、移動 (<code class="text-xs">\move</code>) 與九宮格錨點</td>
+                        </tr>
+                        <tr data-category="visual" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">動態與卡拉 OK</td>
+                            <td class="py-3.5 px-5 text-slate-400 border-l border-slate-800/80">不支援</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">可在句子內穿插時間戳記 <code class="text-xs">&lt;00:01.500&gt;</code> 達成逐字變色</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">原生支援複雜 KTV 標籤 (<code class="text-xs">\k</code>, <code class="text-xs">\kf</code>, <code class="text-xs">\ko</code>) 與時間軸插值動畫 (<code class="text-xs">\t</code>)</td>
+                        </tr>
+                        <tr data-category="syntax" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">註解與詮釋資料</td>
+                            <td class="py-3.5 px-5 text-slate-400 border-l border-slate-800/80">不支援註解 (任何文字皆會顯示於畫面)</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">支援 <code class="text-xs">NOTE</code> 區塊註解，可作為章節軌 (Chapters) 或縮圖軌</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">支援 <code class="text-xs">Comment:</code> 註解行、繪圖指令碼 (<code class="text-xs">\p1</code>) 與附件封裝</td>
+                        </tr>
+                        <tr data-category="ecosystem" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">瀏覽器原生支援</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">不支援 (需在前端透過 JS 轉為 VTT 才能餵給 <code class="text-xs">&lt;track&gt;</code>)</td>
+                            <td class="py-3.5 px-5 text-emerald-400 font-medium border-l border-slate-800/80">所有現代瀏覽器 HTML5 <code class="text-xs">&lt;track&gt;</code> 原生直接支援</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">不支援 (需引入 WebAssembly 版 <code class="text-xs">libass</code> 如 JASSUB 在 Canvas 渲染)</td>
+                        </tr>
+                        <tr data-category="ecosystem" class="hover:bg-slate-800/40 transition">
+                            <td class="py-3.5 px-5 font-semibold text-white">最佳應用場景</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">YouTube/社群上傳、Premiere/DaVinci 剪輯匯入、AI 語音轉寫</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">自建線上課程網站、OTT 串流平台 (HLS/DASH)、無障礙字幕</td>
+                            <td class="py-3.5 px-5 text-slate-300 border-l border-slate-800/80">動畫番劇壓製、VTuber 烤肉精華、綜藝花字、KTV 伴唱帶</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Developer Micro-Tools (Color & Timestamp Converter) -->
+        <section id="converter" class="scroll-mt-20 grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Tool 1: Web RGB Hex to ASS &HAABBGGRR& Converter -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h4 class="text-base font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+                            網頁色碼 (RGB) ⇄ ASS 色碼 (BGR) 轉換器
+                        </h4>
+                        <p class="text-xs text-slate-400 mt-0.5">ASS 採用反轉的 <code class="text-purple-300">&amp;HAABBGGRR&amp;</code> 順序，且 Alpha <code class="text-purple-300">00</code> 代表完全不透明</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1.5">選擇顏色 (Web #RRGGBB)</label>
+                        <div class="flex items-center gap-2">
+                            <input type="color" id="conv-color" value="#00e5ff" oninput="updateColorConverter()" class="w-11 h-10 rounded-xl bg-slate-950 border border-slate-700 cursor-pointer p-1">
+                            <input type="text" id="conv-hex-text" value="#00E5FF" oninput="syncHexInput()" maxlength="7" class="w-full font-mono text-sm bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white uppercase">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1.5">
+                            <span class="text-slate-400">不透明度 (Opacity)</span>
+                            <span id="conv-alpha-label" class="font-mono text-purple-400">100% (ASS Alpha: 00)</span>
+                        </div>
+                        <input type="range" id="conv-alpha" min="0" max="100" value="100" oninput="updateColorConverter()" class="w-full accent-purple-500 mt-2">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="text-[11px] text-slate-400">ASS 樣式表色碼 (PrimaryColour)</div>
+                        <div id="out-ass-style" class="font-mono text-sm font-bold text-purple-300 mt-1 select-all">&amp;H00FFE500</div>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="text-[11px] text-slate-400">ASS 行內覆寫標籤 (Override Tag)</div>
+                        <div id="out-ass-inline" class="font-mono text-sm font-bold text-amber-300 mt-1 select-all">{\c&amp;HFFE500&amp;}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 2: Timestamp Format Comparator -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-4">
+                <div>
+                    <h4 class="text-base font-bold text-white flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                        時間軸精度與格式即時換算器
+                    </h4>
+                    <p class="text-xs text-slate-400 mt-0.5">輸入總秒數與毫秒，自動產生三種字幕格式的標準時間戳記</p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 pt-2">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">分鐘 (Min)</label>
+                        <input type="number" id="ts-min" value="1" min="0" max="599" oninput="updateTimestampConverter()" class="w-full font-mono text-sm bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">秒數 (Sec)</label>
+                        <input type="number" id="ts-sec" value="25" min="0" max="59" oninput="updateTimestampConverter()" class="w-full font-mono text-sm bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">毫秒 (ms, 0-999)</label>
+                        <input type="number" id="ts-ms" value="678" min="0" max="999" oninput="updateTimestampConverter()" class="w-full font-mono text-sm bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2.5 pt-2">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-amber-500/20">
+                        <div class="text-[11px] text-amber-400 font-mono">SRT (逗號毫秒)</div>
+                        <div id="out-ts-srt" class="font-mono text-xs sm:text-sm font-bold text-white mt-1 select-all">00:01:25,678</div>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-sky-500/20">
+                        <div class="text-[11px] text-sky-400 font-mono">WebVTT (小數點)</div>
+                        <div id="out-ts-vtt" class="font-mono text-xs sm:text-sm font-bold text-white mt-1 select-all">00:01:25.678</div>
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-purple-500/20">
+                        <div class="text-[11px] text-purple-400 font-mono">ASS (捨入至厘秒)</div>
+                        <div id="out-ts-ass" class="font-mono text-xs sm:text-sm font-bold text-white mt-1 select-all">0:01:25.68</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECTION 5: Interactive Format Recommendation Wizard -->
+        <section id="wizard" class="scroll-mt-20 bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/40 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div class="max-w-3xl">
+                <h3 class="text-xl font-bold text-white">實務選型決策器：我該使用哪種字幕格式？</h3>
+                <p class="text-xs text-slate-400 mt-1">點選您目前的專案需求，系統將給出最佳格式與技術建議方案</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5">
+                <button onclick="showRecommendation('social')" id="wiz-social" class="wiz-btn text-left p-4 rounded-xl border border-indigo-500 bg-indigo-950/40 transition hover:bg-slate-800/70">
+                    <div class="text-xs font-mono text-indigo-400 mb-1">場景 01</div>
+                    <div class="font-bold text-sm text-white">上傳 YouTube / 剪輯軟體</div>
+                    <p class="text-xs text-slate-400 mt-1">用於社群平台外掛字幕、Whisper 語音辨識輸出或 Premiere 匯入</p>
+                </button>
+
+                <button onclick="showRecommendation('web')" id="wiz-web" class="wiz-btn text-left p-4 rounded-xl border border-slate-800 bg-slate-950/60 transition hover:bg-slate-800/70">
+                    <div class="text-xs font-mono text-sky-400 mb-1">場景 02</div>
+                    <div class="font-bold text-sm text-white">開發 HTML5 網頁播放器</div>
+                    <p class="text-xs text-slate-400 mt-1">使用 `&lt;video&gt;` 標籤、HLS 串流、需要自訂 CSS 樣式與章節進度條</p>
+                </button>
+
+                <button onclick="showRecommendation('anime')" id="wiz-anime" class="wiz-btn text-left p-4 rounded-xl border border-slate-800 bg-slate-950/60 transition hover:bg-slate-800/70">
+                    <div class="text-xs font-mono text-purple-400 mb-1">場景 03</div>
+                    <div class="font-bold text-sm text-white">動漫翻譯 / 綜藝花字 / KTV</div>
+                    <p class="text-xs text-slate-400 mt-1">需要畫面背景招牌對位、雙語字體分離、卡拉 OK 變色或動態特效</p>
+                </button>
+
+                <button onclick="showRecommendation('web-ass')" id="wiz-web-ass" class="wiz-btn text-left p-4 rounded-xl border border-slate-800 bg-slate-950/60 transition hover:bg-slate-800/70">
+                    <div class="text-xs font-mono text-emerald-400 mb-1">場景 04</div>
+                    <div class="font-bold text-sm text-white">在網頁無損播放 ASS 特效</div>
+                    <p class="text-xs text-slate-400 mt-1">不想把特效字幕壓死在影片裡 (Hardsub)，但要在瀏覽器重現特效</p>
+                </button>
+            </div>
+
+            <!-- Recommendation Result Box -->
+            <div id="wiz-result" class="mt-5 p-5 rounded-xl bg-slate-950/90 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Current Sandbox State
+        let currentFormat = 'srt';
+        let specialEffectEnabled = true;
+
+        // Format Selection Logic
+        function selectFormat(fmt) {
+            currentFormat = fmt;
+
+            // Update Overview Cards styling
+            const cards = {
+                srt: document.getElementById('card-srt'),
+                vtt: document.getElementById('card-vtt'),
+                ass: document.getElementById('card-ass')
+            };
+            Object.keys(cards).forEach(k => {
+                cards[k].className = "cursor-pointer group relative rounded-2xl p-5 bg-slate-900/60 border border-slate-800 transition-all duration-200 hover:-translate-y-0.5";
+            });
+
+            if (fmt === 'srt') cards.srt.className = "cursor-pointer group relative rounded-2xl p-5 bg-slate-900/90 border-2 border-amber-500/80 shadow-lg shadow-amber-500/5 transition-all duration-200";
+            if (fmt === 'vtt') cards.vtt.className = "cursor-pointer group relative rounded-2xl p-5 bg-slate-900/90 border-2 border-sky-500/80 shadow-lg shadow-sky-500/5 transition-all duration-200";
+            if (fmt === 'ass') cards.ass.className = "cursor-pointer group relative rounded-2xl p-5 bg-slate-900/90 border-2 border-purple-500/80 shadow-lg shadow-purple-500/5 transition-all duration-200";
+
+            // Update Sandbox Tabs
+            const tabs = {
+                srt: document.getElementById('tab-srt'),
+                vtt: document.getElementById('tab-vtt'),
+                ass: document.getElementById('tab-ass')
+            };
+            Object.keys(tabs).forEach(k => {
+                tabs[k].className = "px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition text-slate-400 hover:text-white";
+            });
+            if (fmt === 'srt') tabs.srt.className = "px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition bg-amber-500 text-slate-950 shadow";
+            if (fmt === 'vtt') tabs.vtt.className = "px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition bg-sky-500 text-slate-950 shadow";
+            if (fmt === 'ass') tabs.ass.className = "px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition bg-purple-500 text-white shadow";
+
+            updateSandbox();
+        }
+
+        function toggleSpecialEffect() {
+            specialEffectEnabled = !specialEffectEnabled;
+            updateSandbox();
+        }
+
+        // Convert Web #RRGGBB to ASS &H00BBGGRR&
+        function hexToAssBGR(hex) {
+            const clean = hex.replace('#', '').toUpperCase();
+            const r = clean.substring(0, 2);
+            const g = clean.substring(2, 4);
+            const b = clean.substring(4, 6);
+            return `&H00${b}${g}${r}&`;
+        }
+
+        // Main Sandbox Update Function
+        function updateSandbox() {
+            const textLine1 = document.getElementById('input-text').value || '這是第一行範例對白字幕';
+            const pos = document.getElementById('input-pos').value;
+            const hexColor = document.getElementById('input-color').value.toUpperCase();
+            const assBGR = hexToAssBGR(hexColor);
+
+            // DOM Elements
+            const subWrapper = document.getElementById('subtitle-wrapper');
+            const subBox = document.getElementById('subtitle-box');
+            const subLine1 = document.getElementById('sub-line-1');
+            const subHighlight = document.getElementById('sub-highlight');
+            const signboard = document.getElementById('ass-signboard');
+            const hudRenderer = document.getElementById('hud-renderer');
+            const hudCoords = document.getElementById('hud-coords');
+            const controlBadge = document.getElementById('control-badge');
+            const colorCodeDisplay = document.getElementById('color-code-display');
+            const specialBtnText = document.getElementById('special-btn-text');
+            const specialDot = document.getElementById('special-dot');
+            const limitationNotice = document.getElementById('limitation-notice');
+            const limitationText = document.getElementById('limitation-text');
+            const codeFilename = document.getElementById('code-filename');
+            const codeOutput = document.getElementById('code-output');
+            const syntaxAnatomy = document.getElementById('syntax-anatomy');
+            const posLabel = document.getElementById('pos-label');
+
+            // Update Line 1 Text
+            subLine1.textContent = textLine1;
+
+            // Position Mapping
+            subWrapper.className = "absolute inset-0 pointer-events-none flex flex-col items-center p-7 transition-all duration-300 ";
+            if (pos === 'bottom') {
+                subWrapper.classList.add('justify-end');
+                posLabel.textContent = currentFormat === 'vtt' ? 'line:85%' : (currentFormat === 'ass' ? '\\an2 (底部)' : '底部預設');
+            } else if (pos === 'top') {
+                subWrapper.classList.add('justify-start', 'pt-12');
+                posLabel.textContent = currentFormat === 'vtt' ? 'line:10%' : (currentFormat === 'ass' ? '\\an8 (頂部)' : '{\\an8} 非官方擴充');
+            } else {
+                subWrapper.classList.add('justify-center');
+                posLabel.textContent = currentFormat === 'vtt' ? 'line:50%' : (currentFormat === 'ass' ? '\\pos(960,540)' : '{\\an5} 非官方擴充');
+            }
+
+            // Reset classes
+            subBox.className = "text-center transition-all duration-200 px-3.5 py-1.5 rounded-lg";
+            subLine1.className = "text-lg sm:text-xl md:text-2xl font-bold text-white";
+            subHighlight.className = "font-bold";
+            subHighlight.style.color = hexColor;
+            signboard.classList.add('hidden');
+
+            // Special dot indicator
+            specialDot.className = specialEffectEnabled ? "w-2.5 h-2.5 rounded-full bg-emerald-400" : "w-2.5 h-2.5 rounded-full bg-slate-500";
+
+            if (currentFormat === 'srt') {
+                hudRenderer.textContent = "Renderer: SubRip Basic Text Parser";
+                hudCoords.textContent = pos === 'bottom' ? "Standard Bottom" : "Non-standard {\\an} fallback";
+                controlBadge.textContent = "目前模式：SRT (.srt)";
+                controlBadge.className = "text-xs font-mono px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300";
+                colorCodeDisplay.textContent = `<font color="${hexColor}">`;
+                specialBtnText.textContent = specialEffectEnabled ? "已啟用非官方 <font> 與 {\\an} 標籤" : "僅使用 100% 純文字標準 SRT";
+                codeFilename.textContent = "dialogue.srt";
+
+                if (!specialEffectEnabled) {
+                    subHighlight.style.color = '#ffffff';
+                    subWrapper.className = "absolute inset-0 pointer-events-none flex flex-col items-center justify-end p-7";
+                }
+
+                subLine1.classList.add("drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]");
+
+                limitationNotice.className = "rounded-xl p-3 bg-amber-950/40 border border-amber-500/30 text-xs text-amber-200/90 flex items-start gap-2.5";
+                limitationText.innerHTML = `<strong>SRT 渲染限制：</strong> 嚴格的 SRT 規範不支援任何顏色或座標設定。上方切換至頂部或改色時，使用的是非官方擴充語法 (<code>&lt;font&gt;</code> 與 <code>{\\an8}</code>)，在部分瀏覽器或電視播放器可能會失效。`;
+
+                const alignTag = (specialEffectEnabled && pos !== 'bottom') ? (pos === 'top' ? '{\\an8}' : '{\\an5}') : '';
+                const colorOpen = specialEffectEnabled ? `<span class="syn-tag">&lt;font color="${hexColor}"&gt;&lt;b&gt;</span>` : '';
+                const colorClose = specialEffectEnabled ? `<span class="syn-tag">&lt;/b&gt;&lt;/font&gt;</span>` : '';
+
+                codeOutput.innerHTML = `<pre class="leading-relaxed"><span class="syn-num">1</span>
+<span class="syn-time">00:01:20,000 --&gt; 00:01:24,500</span>
+<span class="syn-tag">${alignTag}</span>${escapeHtml(textLine1)}
+搭配${colorOpen}重點強調樣式${colorClose}的第二行文字
+
+<span class="syn-num">2</span>
+<span class="syn-time">00:01:25,000 --&gt; 00:01:28,000</span>
+純文字結構簡單，所有轉檔軟體皆可直接讀取。</pre>`;
+
+                syntaxAnatomy.innerHTML = `
+                    <div class="flex items-start gap-2"><span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono text-[11px] shrink-0">逗號毫秒</span><span>時間軸強制使用逗號 <code>00:01:20,000</code>，若誤用小數點會導致部分傳統剪輯軟體報錯。</span></div>
+                    <div class="flex items-start gap-2"><span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 font-mono text-[11px] shrink-0">無檔頭結構</span><span>第一行直接從序號 <code>1</code> 開始，雙行字幕直接換行，段落間以空白行分隔。</span></div>
+                `;
+            } 
+            else if (currentFormat === 'vtt') {
+                hudRenderer.textContent = "Renderer: HTML5 <track> + CSS ::cue";
+                const vttLine = pos === 'bottom' ? '85%' : (pos === 'top' ? '10%' : '50%');
+                hudCoords.textContent = `Cue Settings: line:${vttLine} align:center`;
+                controlBadge.textContent = "目前模式：WebVTT (.vtt)";
+                controlBadge.className = "text-xs font-mono px-2.5 py-0.5 rounded bg-sky-500/20 text-sky-300";
+                colorCodeDisplay.textContent = `CSS color: ${hexColor};`;
+                specialBtnText.textContent = specialEffectEnabled ? "已套用 WebVTT 半透明黑底框 (::cue)" : "關閉預設黑底背景框";
+                codeFilename.textContent = "captions.vtt";
+
+                if (specialEffectEnabled) {
+                    subBox.classList.add("bg-black/75", "backdrop-blur-xs", "shadow-lg");
+                }
+
+                limitationNotice.className = "rounded-xl p-3 bg-sky-950/40 border border-sky-500/30 text-xs text-sky-200/90 flex items-start gap-2.5";
+                limitationText.innerHTML = `<strong>WebVTT 網頁優勢：</strong> 唯一獲 HTML5 <code>&lt;video&gt;</code> 原生支援的格式。可直接將網頁的 CSS 變數與樣式套用至 <code>::cue(.highlight)</code>，並支援百分比行距定位與無障礙閱讀器。`;
+
+                const bgCss = specialEffectEnabled ? `rgba(0, 0, 0, 0.75)` : `transparent`;
+
+                codeOutput.innerHTML = `<pre class="leading-relaxed"><span class="syn-header">WEBVTT</span>
+
+<span class="syn-comment">NOTE 內嵌 CSS 樣式區塊 (由瀏覽器 ::cue 解析)</span>
+<span class="syn-header">STYLE</span>
+<span class="syn-key">::cue</span> {
+  background-color: ${bgCss};
+  color: #ffffff;
+}
+<span class="syn-key">::cue(.highlight)</span> {
+  color: <span class="syn-num">${hexColor}</span>;
+  font-weight: bold;
+}
+
+<span class="syn-comment">cue-1</span>
+<span class="syn-time">00:01:20.000 --&gt; 00:01:24.500</span> <span class="syn-key">line:${vttLine} position:50% align:center</span>
+${escapeHtml(textLine1)}
+搭配<span class="syn-tag">&lt;c.highlight&gt;</span>重點強調樣式<span class="syn-tag">&lt;/c&gt;</span>的第二行文字</pre>`;
+
+                syntaxAnatomy.innerHTML = `
+                    <div class="flex items-start gap-2"><span class="px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-[11px] shrink-0">WEBVTT 檔頭</span><span>首行必須為大寫 <code>WEBVTT</code>，毫秒分隔符號改為小數點 <code>.000</code>。</span></div>
+                    <div class="flex items-start gap-2"><span class="px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-[11px] shrink-0">Cue 排版參數</span><span>時間軸後方可直接寫入 <code>line:${vttLine} align:center</code>，並用 <code>&lt;c.類別名&gt;</code> 套用 CSS。</span></div>
+                `;
+            } 
+            else if (currentFormat === 'ass') {
+                hudRenderer.textContent = "Renderer: libass / WebAssembly Canvas";
+                const assAlign = pos === 'bottom' ? '\\an2\\pos(960,1010)' : (pos === 'top' ? '\\an8\\pos(960,90)' : '\\an5\\pos(960,540)');
+                hudCoords.textContent = `PlayRes: 1920x1080 | ${assAlign}`;
+                controlBadge.textContent = "目前模式：ASS 特效 (.ass)";
+                controlBadge.className = "text-xs font-mono px-2.5 py-0.5 rounded bg-purple-500/20 text-purple-300";
+                colorCodeDisplay.textContent = `ASS BGR: ${assBGR}`;
+                specialBtnText.textContent = specialEffectEnabled ? "已開啟：背景招牌追蹤 + 卡拉 OK 掃光" : "開啟 ASS 招牌定位與卡拉 OK 特效";
+                codeFilename.textContent = "anime_typeset.ass";
+
+                // Apply heavy ASS stroke
+                subLine1.classList.add("ass-stroke");
+                subHighlight.classList.add("ass-stroke");
+
+                if (specialEffectEnabled) {
+                    signboard.classList.remove('hidden');
+                    subLine1.classList.add("karaoke-text");
+                }
+
+                limitationNotice.className = "rounded-xl p-3 bg-purple-950/40 border border-purple-500/30 text-xs text-purple-200/90 flex items-start gap-2.5";
+                limitationText.innerHTML = `<strong>ASS 特效排版能力：</strong> 注意畫面左上角模擬的「東京車站」傾斜招牌與主字幕的卡拉 OK 填色動畫。ASS 可同時在畫面任意像素座標疊加多層圖層，且換行必須使用 <code>\\N</code>。`;
+
+                const signDialogue = specialEffectEnabled 
+                    ? `\n<span class="syn-comment">; 圖層 1：左上角背景招牌對位與 Z 軸旋轉</span>\n<span class="syn-key">Dialogue:</span> 1,0:01:20.00,0:01:24.50,Sign,,0,0,0,,<span class="syn-tag">{\\pos(240,160)\\frz6\\bord2\\c&amp;HFFFFFF&amp;\\3c&amp;H993333&amp;}</span>東京車站・八重洲口`
+                    : '';
+                const karaokeTag = specialEffectEnabled ? `\\kf180` : ``;
+
+                codeOutput.innerHTML = `<pre class="leading-relaxed"><span class="syn-header">[Script Info]</span>
+ScriptType: v4.00+
+PlayResX: <span class="syn-num">1920</span>
+PlayResY: <span class="syn-num">1080</span>
+
+<span class="syn-header">[V4+ Styles]</span>
+<span class="syn-key">Format:</span> Name, Fontname, Fontsize, PrimaryColour, OutlineColour, Outline, Shadow, Alignment
+<span class="syn-key">Style:</span> Default,Noto Sans TC,64,<span class="syn-num">&amp;H00FFFFFF</span>,<span class="syn-num">&amp;H00000000</span>,3,2,2
+
+<span class="syn-header">[Events]</span>
+<span class="syn-key">Format:</span> Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text${signDialogue}
+<span class="syn-comment">; 圖層 0：底部主對白 (含動態淡入淡出與行內變色)</span>
+<span class="syn-key">Dialogue:</span> 0,<span class="syn-time">0:01:20.00,0:01:24.50</span>,Default,,0,0,0,,<span class="syn-tag">{${assAlign}\\fad(250,250)${karaokeTag}}</span>${escapeHtml(textLine1)}\\N搭配<span class="syn-tag">{\\b1\\c${assBGR}}</span>重點強調樣式<span class="syn-tag">{\\b0\\c}</span>的第二行文字</pre>`;
+
+                syntaxAnatomy.innerHTML = `
+                    <div class="flex items-start gap-2"><span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-[11px] shrink-0">反轉 BGR 色碼</span><span>顏色順序為 <code>&amp;HAABBGGRR&amp;</code> (藍綠紅)，與網頁 HEX 順序相反。</span></div>
+                    <div class="flex items-start gap-2"><span class="px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-[11px] shrink-0">覆寫標籤 {}</span><span>在大括號內使用 <code>\\pos(x,y)</code> 指定座標、<code>\\fad</code> 淡入淡出，換行固定寫成 <code>\\N</code>。</span></div>
+                `;
+            }
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        // Copy Code Helper
+        function copyCode() {
+            const rawText = document.getElementById('code-output').innerText;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = rawText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const btn = document.getElementById('btn-copy');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = `<span class="text-emerald-400 font-bold">✓ 已複製到剪貼簿</span>`;
+            setTimeout(() => { btn.innerHTML = originalHTML; }, 1800);
+        }
+
+        // Table Category Filter
+        function filterTable(category) {
+            const rows = document.querySelectorAll('#comparison-tbody tr');
+            rows.forEach(row => {
+                if (category === 'all' || row.getAttribute('data-category') === category) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-cat') === category) {
+                    btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-indigo-600 text-white transition";
+                } else {
+                    btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition";
+                }
+            });
+        }
+
+        // Tool 1: RGB to ASS Color Converter
+        function updateColorConverter() {
+            const hex = document.getElementById('conv-color').value.toUpperCase();
+            document.getElementById('conv-hex-text').value = hex;
+            const opacity = parseInt(document.getElementById('conv-alpha').value, 10);
+
+            // In ASS, 00 = 100% opaque, FF = 0% opaque (100% transparent)
+            const transparency = Math.round(((100 - opacity) / 100) * 255);
+            const alphaHex = transparency.toString(16).toUpperCase().padStart(2, '0');
+
+            const r = hex.substring(1, 3);
+            const g = hex.substring(3, 5);
+            const b = hex.substring(5, 7);
+
+            document.getElementById('conv-alpha-label').textContent = `${opacity}% (ASS Alpha: ${alphaHex})`;
+            document.getElementById('out-ass-style').textContent = `&H${alphaHex}${b}${g}${r}`;
+            document.getElementById('out-ass-inline').textContent = `{\\c&H${b}${g}${r}&\\alpha&H${alphaHex}&}`;
+        }
+
+        function syncHexInput() {
+            const val = document.getElementById('conv-hex-text').value;
+            if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+                document.getElementById('conv-color').value = val;
+                updateColorConverter();
+            }
+        }
+
+        // Tool 2: Timestamp Converter
+        function updateTimestampConverter() {
+            let totalMin = parseInt(document.getElementById('ts-min').value, 10) || 0;
+            let sec = parseInt(document.getElementById('ts-sec').value, 10) || 0;
+            let ms = parseInt(document.getElementById('ts-ms').value, 10) || 0;
+
+            if (sec > 59) sec = 59;
+            if (ms > 999) ms = 999;
+
+            const hours = Math.floor(totalMin / 60);
+            const mins = totalMin % 60;
+
+            const hh2 = String(hours).padStart(2, '0');
+            const h1 = String(hours);
+            const mm2 = String(mins).padStart(2, '0');
+            const ss2 = String(sec).padStart(2, '0');
+            const ms3 = String(ms).padStart(3, '0');
+
+            // ASS uses centiseconds (rounded from ms)
+            const cs = Math.min(99, Math.round(ms / 10));
+            const cs2 = String(cs).padStart(2, '0');
+
+            document.getElementById('out-ts-srt').textContent = `${hh2}:${mm2}:${ss2},${ms3}`;
+            document.getElementById('out-ts-vtt').textContent = `${hh2}:${mm2}:${ss2}.${ms3}`;
+            document.getElementById('out-ts-ass').textContent = `${h1}:${mm2}:${ss2}.${cs2}`;
+        }
+
+        // Section 5: Decision Wizard
+        const recommendations = {
+            'social': {
+                badge: '首選格式：SRT (.srt)',
+                badgeColor: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+                title: '建議採用 SRT 純文字格式',
+                desc: '幾乎所有社群平台 (YouTube、Facebook、IG)、非线性剪輯軟體 (Premiere Pro、DaVinci Resolve) 與 AI 語音轉文字模型 (OpenAI Whisper) 都將 SRT 作為最穩定的通用交換標準。不會因為複雜標籤造成解析錯誤。',
+                actionFormat: 'srt'
+            },
+            'web': {
+                badge: '唯一標準：WebVTT (.vtt)',
+                badgeColor: 'bg-sky-500/20 text-sky-300 border-sky-500/40',
+                title: '建議採用 HTML5 WebVTT 格式',
+                desc: '現代瀏覽器的 <video> 與 <track> 標籤僅原生支援 WebVTT。除了可以透過 CSS ::cue 統一控制網站字幕外觀，還能利用 VTT 儲存章節點 (Chapters) 與時間軸縮圖預覽 (Thumbnails)，更是 HLS / MPEG-DASH 串流封裝的標準格式。',
+                actionFormat: 'vtt'
+            },
+            'anime': {
+                badge: '特效首選：ASS (.ass)',
+                badgeColor: 'bg-purple-500/20 text-purple-300 border-purple-500/40',
+                title: '建議採用 Aegisub + ASS 特效字幕格式',
+                desc: '當影片需要「雙語字幕不同字型大小」、「頂部專有名詞科普註解」、「跟隨背景招牌傾斜移動 (Typesetting)」或「KTV 卡拉 OK 逐字填色」時，SRT 與 VTT 皆無法勝任，必須使用具備獨立畫布座標與覆寫指令碼的 ASS 格式。',
+                actionFormat: 'ass'
+            },
+            'web-ass': {
+                badge: '進階架構：ASS + WebAssembly',
+                badgeColor: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+                title: '建議採用 ASS 搭配 JASSUB / SubtitlesOctopus 網頁渲染器',
+                desc: '若不希望將 ASS 壓製成死字幕 (Hardsub) 犧牲畫質與多語切換彈性，可在網頁端載入將 C++ libass 編譯為 WebAssembly 的開源套件 (如 JASSUB)，直接於 <video> 上層覆蓋透明 <canvas> 即時算繪 ASS 特效。',
+                actionFormat: 'ass'
+            }
+        };
+
+        function showRecommendation(key) {
+            const data = recommendations[key];
+            const buttons = document.querySelectorAll('.wiz-btn');
+            buttons.forEach(b => {
+                b.className = "wiz-btn text-left p-4 rounded-xl border border-slate-800 bg-slate-950/60 transition hover:bg-slate-800/70";
+            });
+            document.getElementById(`wiz-${key}`).className = "wiz-btn text-left p-4 rounded-xl border border-indigo-500 bg-indigo-950/40 transition shadow-lg";
+
+            const resBox = document.getElementById('wiz-result');
+            resBox.innerHTML = `
+                <div class="space-y-2 max-w-3xl">
+                    <span class="inline-block px-2.5 py-0.5 rounded-md text-xs font-mono font-bold border ${data.badgeColor}">${data.badge}</span>
+                    <h4 class="text-base sm:text-lg font-bold text-white">${data.title}</h4>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${data.desc}</p>
+                </div>
+                <button onclick="selectFormat('${data.actionFormat}'); document.getElementById('sandbox').scrollIntoView({behavior: 'smooth'});" 
+                    class="shrink-0 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition shadow-lg">
+                    在上方沙盒預覽此格式 →
+                </button>
+            `;
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            updateSandbox();
+            updateColorConverter();
+            updateTimestampConverter();
+            showRecommendation('social');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="SRT vs VTT vs ASS — 互動式字幕格式全解析">
+  <title>影片字幕格式互動實驗室 — SRT vs VTT vs ASS</title>
+  <desc>Open Graph social share image (1200×630) for the subtitle-format interactive explainer.</desc>
+
+  <defs>
+    <style>
+      .d  { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+      .m  { font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace; }
+    </style>
+
+    <!-- Dark radial stage, matching .video-stage on the page -->
+    <radialGradient id="bgRadial" cx="50%" cy="35%" r="78%">
+      <stop offset="0%"   stop-color="#1e293b"/>
+      <stop offset="55%"  stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#090d16"/>
+    </radialGradient>
+
+    <!-- Format accent glows sitting under the three cards -->
+    <radialGradient id="gSrt">
+      <stop offset="0%"   stop-color="#f59e0b" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gVtt">
+      <stop offset="0%"   stop-color="#0ea5e9" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gAss">
+      <stop offset="0%"   stop-color="#a855f7" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- CC badge frame: Tailwind from-amber-500 via-sky-500 to-purple-600 -->
+    <linearGradient id="ccGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#f59e0b"/>
+      <stop offset="50%"  stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+
+    <!-- Brand strip along the top edge -->
+    <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#f59e0b"/>
+      <stop offset="50%"  stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+
+    <!-- Hairline under the header row -->
+    <linearGradient id="hairGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#334155" stop-opacity="0"/>
+      <stop offset="50%"  stop-color="#334155" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#334155" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Subtle 40px stage grid, faded at the edges -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="gridFade" cx="50%" cy="40%" r="72%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="70%"  stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="gridMask">
+      <rect x="0" y="0" width="1200" height="630" fill="url(#gridFade)"/>
+    </mask>
+
+    <filter id="titleShadow" x="-10%" y="-30%" width="120%" height="180%">
+      <feDropShadow dx="0" dy="4" stdDeviation="14" flood-color="#000000" flood-opacity="0.65"/>
+    </filter>
+  </defs>
+
+  <!-- ============ BACKGROUND ============ -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgRadial)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#grid)" mask="url(#gridMask)"/>
+  <ellipse cx="244"  cy="600" rx="260" ry="170" fill="url(#gSrt)"/>
+  <ellipse cx="600"  cy="600" rx="260" ry="170" fill="url(#gVtt)"/>
+  <ellipse cx="956"  cy="600" rx="260" ry="170" fill="url(#gAss)"/>
+  <rect x="0" y="0" width="1200" height="5" fill="url(#barGrad)"/>
+
+  <!-- ============ HEADER ROW ============ -->
+  <!-- CC badge -->
+  <rect x="80" y="54" width="60" height="60" rx="18" fill="url(#ccGrad)"/>
+  <rect x="82" y="56" width="56" height="56" rx="16" fill="#020617"/>
+  <text class="m" x="110" y="91" text-anchor="middle" font-size="21" font-weight="700" letter-spacing="-0.5" fill="#ffffff">CC</text>
+
+  <text class="d" x="158" y="81" font-size="22" font-weight="600" letter-spacing="0.5" fill="#f1f5f9">影片字幕格式互動實驗室</text>
+  <text class="d" x="158" y="105" font-size="13" font-weight="400" letter-spacing="0.5" fill="#64748b">即時預覽渲染效果、語法結構拆解與規格比較表</text>
+
+  <!-- mono pill, mirroring the page header badge -->
+  <rect x="952" y="67" width="168" height="34" rx="17" fill="#1e293b" fill-opacity="0.65" stroke="#334155" stroke-width="1"/>
+  <text class="m" x="1036" y="89" text-anchor="middle" font-size="13" font-weight="600" letter-spacing="1" fill="#cbd5e1">SRT / VTT / ASS</text>
+
+  <rect x="80" y="141" width="1040" height="1" fill="url(#hairGrad)"/>
+
+  <!-- ============ TITLE BLOCK ============ -->
+  <text class="d" x="600" y="316" text-anchor="middle" font-size="98" font-weight="800" letter-spacing="-2.5" filter="url(#titleShadow)"><tspan fill="#f59e0b">SRT</tspan><tspan fill="#64748b" font-weight="700"> vs </tspan><tspan fill="#0ea5e9">VTT</tspan><tspan fill="#64748b" font-weight="700"> vs </tspan><tspan fill="#a855f7">ASS</tspan></text>
+  <text class="d" x="600" y="384" dx="5" text-anchor="middle" font-size="34" font-weight="500" letter-spacing="10" fill="#cbd5e1">互動式字幕格式全解析</text>
+
+  <!-- ============ FORMAT CARDS ============ -->
+  <!-- SRT -->
+  <g>
+    <rect x="80" y="446" width="328" height="118" rx="18" fill="#0f172a" fill-opacity="0.92" stroke="#f59e0b" stroke-opacity="0.65" stroke-width="2"/>
+    <rect x="100" y="463" width="62" height="28" rx="8" fill="#f59e0b" fill-opacity="0.18" stroke="#f59e0b" stroke-opacity="0.35" stroke-width="1"/>
+    <text class="m" x="131" y="482" text-anchor="middle" font-size="14.5" font-weight="700" fill="#fbbf24">.SRT</text>
+    <text class="d" x="388" y="482" text-anchor="end" font-size="14" font-weight="500" letter-spacing="0.5" fill="#64748b">相容性之王</text>
+    <text class="d" x="100" y="522" font-size="20" font-weight="700" letter-spacing="-0.2" fill="#f8fafc">SubRip Subtitle</text>
+    <text class="m" x="100" y="548" font-size="13" font-weight="500" fill="#fbbf24" fill-opacity="0.85">00:00:01,000</text>
+    <text class="d" x="388" y="548" text-anchor="end" font-size="12" font-weight="400" letter-spacing="0.5" fill="#475569">逗號毫秒</text>
+  </g>
+
+  <!-- VTT -->
+  <g>
+    <rect x="436" y="446" width="328" height="118" rx="18" fill="#0f172a" fill-opacity="0.92" stroke="#0ea5e9" stroke-opacity="0.65" stroke-width="2"/>
+    <rect x="456" y="463" width="62" height="28" rx="8" fill="#0ea5e9" fill-opacity="0.18" stroke="#0ea5e9" stroke-opacity="0.35" stroke-width="1"/>
+    <text class="m" x="487" y="482" text-anchor="middle" font-size="14.5" font-weight="700" fill="#38bdf8">.VTT</text>
+    <text class="d" x="744" y="482" text-anchor="end" font-size="14" font-weight="500" letter-spacing="0.5" fill="#64748b">W3C 網頁標準</text>
+    <text class="d" x="456" y="522" font-size="20" font-weight="700" letter-spacing="-0.2" fill="#f8fafc">WebVTT</text>
+    <text class="m" x="456" y="548" font-size="13" font-weight="500" fill="#38bdf8" fill-opacity="0.85">00:00:01.000</text>
+    <text class="d" x="744" y="548" text-anchor="end" font-size="12" font-weight="400" letter-spacing="0.5" fill="#475569">小數點毫秒</text>
+  </g>
+
+  <!-- ASS -->
+  <g>
+    <rect x="792" y="446" width="328" height="118" rx="18" fill="#0f172a" fill-opacity="0.92" stroke="#a855f7" stroke-opacity="0.65" stroke-width="2"/>
+    <rect x="812" y="463" width="62" height="28" rx="8" fill="#a855f7" fill-opacity="0.18" stroke="#a855f7" stroke-opacity="0.35" stroke-width="1"/>
+    <text class="m" x="843" y="482" text-anchor="middle" font-size="14.5" font-weight="700" fill="#c084fc">.ASS</text>
+    <text class="d" x="1100" y="482" text-anchor="end" font-size="14" font-weight="500" letter-spacing="0.5" fill="#64748b">特效排版引擎</text>
+    <text class="d" x="812" y="522" font-size="20" font-weight="700" letter-spacing="-0.2" fill="#f8fafc">Advanced SubStation Alpha</text>
+    <text class="m" x="812" y="548" font-size="13" font-weight="500" fill="#c084fc" fill-opacity="0.85">0:00:01.00</text>
+    <text class="d" x="1100" y="548" text-anchor="end" font-size="12" font-weight="400" letter-spacing="0.5" fill="#475569">厘秒精度</text>
+  </g>
+</svg>
