@@ -196,6 +196,7 @@
 
             /* 程式碼區與語法高亮（依淺色代碼底色重新調校對比） */
             --code-bg: #f8fafc;
+            --code-fade-color: #f8fafc;
             --code-text: #1e293b;
             --syn-header: #be185d;
             --syn-time: #0369a1;
@@ -230,6 +231,7 @@
             --karaoke-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95);
 
             --code-bg: rgba(2, 6, 23, 0.6);
+            --code-fade-color: #070d1f;
             --code-text: #e2e8f0;
             --syn-header: #f472b6;
             --syn-time: #38bdf8;
@@ -275,6 +277,11 @@
         #code-output {
             background-color: var(--code-bg);
             color: var(--code-text);
+        }
+
+        /* 程式碼面板橫向捲動提示：長行超出時於右緣顯示漸隱，深淺色皆適用 */
+        .code-scroll-fade {
+            background: linear-gradient(to right, transparent, var(--code-fade-color));
         }
 
         /* 字幕底板：只在淺色主題的淺色舞台上浮現（深色主題沿用原本的透明底） */
@@ -524,7 +531,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <!-- Editable Text Input -->
                             <div>
-                                <label class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="sandbox.controls.textLabel">自訂第一行台詞文字</label>
+                                <label for="input-text" class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="sandbox.controls.textLabel">自訂第一行台詞文字</label>
                                 <input type="text" id="input-text" value="這是第一行範例對白字幕" oninput="updateSandbox()" 
                                     class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500">
                             </div>
@@ -532,7 +539,7 @@
                             <!-- Vertical Position Control -->
                             <div>
                                 <div class="flex justify-between text-xs mb-1.5">
-                                    <span class="text-slate-600 dark:text-slate-400" data-i18n="sandbox.controls.posLabel">垂直位置 / 對齊</span>
+                                    <label for="input-pos" class="text-slate-600 dark:text-slate-400" data-i18n="sandbox.controls.posLabel">垂直位置 / 對齊</label>
                                     <span id="pos-label" class="font-mono text-indigo-600 dark:text-indigo-400" data-i18n="sandbox.pos.srtBottom">底部預設</span>
                                 </div>
                                 <select id="input-pos" onchange="updateSandbox()" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500">
@@ -544,7 +551,7 @@
 
                             <!-- Highlight Color Picker -->
                             <div>
-                                <label class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="sandbox.controls.colorLabel">重點文字顏色 (自動轉換語法色碼)</label>
+                                <label for="input-color" class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="sandbox.controls.colorLabel">重點文字顏色 (自動轉換語法色碼)</label>
                                 <div class="flex items-center gap-2">
                                     <input type="color" id="input-color" value="#fde047" oninput="updateSandbox()" class="w-10 h-9 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 cursor-pointer p-0.5">
                                     <span id="color-code-display" class="text-xs font-mono text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-950 px-2.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 flex-1">
@@ -555,7 +562,7 @@
 
                             <!-- Format-Specific Special Toggle -->
                             <div>
-                                <label class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="sandbox.controls.specialLabel">進階特效開關 (依格式支援度解鎖)</label>
+                                <label for="btn-special" class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="sandbox.controls.specialLabel">進階特效開關 (依格式支援度解鎖)</label>
                                 <div class="flex items-center gap-2">
                                     <button onclick="toggleSpecialEffect()" id="btn-special" class="w-full py-2 px-3 rounded-xl text-xs font-semibold border transition flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700">
                                         <span id="special-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -592,8 +599,12 @@
                     </div>
 
                     <!-- Live Code Display -->
-                    <div class="p-4 font-mono text-xs sm:text-[13px] leading-relaxed overflow-x-auto flex-1 select-all" id="code-output">
-                        <!-- Populated via JS -->
+                    <div class="relative flex flex-col flex-1 min-h-0">
+                        <div class="p-4 font-mono text-xs sm:text-[13px] leading-relaxed overflow-x-auto flex-1 select-all" id="code-output">
+                            <!-- Populated via JS -->
+                        </div>
+                        <!-- 橫向捲動提示：右側尚有內容時於面板右緣漸隱 -->
+                        <div id="code-scroll-fade" aria-hidden="true" class="code-scroll-fade pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-10 opacity-0 transition-opacity duration-200"></div>
                     </div>
 
                     <!-- Syntax Anatomy Breakdown -->
@@ -751,15 +762,15 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                     <div>
-                        <label class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="converter.color.pickerLabel">選擇顏色 (Web #RRGGBB)</label>
+                        <label for="conv-color" id="conv-color-label" class="block text-xs text-slate-600 dark:text-slate-400 mb-1.5" data-i18n="converter.color.pickerLabel">選擇顏色 (Web #RRGGBB)</label>
                         <div class="flex items-center gap-2">
                             <input type="color" id="conv-color" value="#00e5ff" oninput="updateColorConverter()" class="w-11 h-10 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 cursor-pointer p-1">
-                            <input type="text" id="conv-hex-text" value="#00E5FF" oninput="syncHexInput()" maxlength="7" class="w-full font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-slate-900 dark:text-white uppercase">
+                            <input type="text" id="conv-hex-text" value="#00E5FF" oninput="syncHexInput()" maxlength="7" aria-labelledby="conv-color-label" class="w-full font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-slate-900 dark:text-white uppercase">
                         </div>
                     </div>
                     <div>
                         <div class="flex justify-between text-xs mb-1.5">
-                            <span class="text-slate-600 dark:text-slate-400" data-i18n="converter.color.opacityLabel">不透明度 (Opacity)</span>
+                            <label for="conv-alpha" class="text-slate-600 dark:text-slate-400" data-i18n="converter.color.opacityLabel">不透明度 (Opacity)</label>
                             <span id="conv-alpha-label" class="font-mono text-purple-700 dark:text-purple-400" data-i18n="converter.color.opacityValue" data-i18n-params="{&quot;opacity&quot;:&quot;100&quot;,&quot;alpha&quot;:&quot;00&quot;}">100% (ASS Alpha: 00)</span>
                         </div>
                         <input type="range" id="conv-alpha" min="0" max="100" value="100" oninput="updateColorConverter()" class="w-full accent-purple-500 mt-2">
@@ -790,15 +801,15 @@
 
                 <div class="grid grid-cols-3 gap-3 pt-2">
                     <div>
-                        <label class="block text-xs text-slate-600 dark:text-slate-400 mb-1" data-i18n="converter.time.minLabel">分鐘 (Min)</label>
+                        <label for="ts-min" class="block text-xs text-slate-600 dark:text-slate-400 mb-1" data-i18n="converter.time.minLabel">分鐘 (Min)</label>
                         <input type="number" id="ts-min" value="1" min="0" max="599" oninput="updateTimestampConverter()" class="w-full font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-slate-900 dark:text-white">
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-600 dark:text-slate-400 mb-1" data-i18n="converter.time.secLabel">秒數 (Sec)</label>
+                        <label for="ts-sec" class="block text-xs text-slate-600 dark:text-slate-400 mb-1" data-i18n="converter.time.secLabel">秒數 (Sec)</label>
                         <input type="number" id="ts-sec" value="25" min="0" max="59" oninput="updateTimestampConverter()" class="w-full font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-slate-900 dark:text-white">
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-600 dark:text-slate-400 mb-1" data-i18n="converter.time.msLabel">毫秒 (ms, 0-999)</label>
+                        <label for="ts-ms" class="block text-xs text-slate-600 dark:text-slate-400 mb-1" data-i18n="converter.time.msLabel">毫秒 (ms, 0-999)</label>
                         <input type="number" id="ts-ms" value="678" min="0" max="999" oninput="updateTimestampConverter()" class="w-full font-mono text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-slate-900 dark:text-white">
                     </div>
                 </div>
@@ -1415,11 +1426,25 @@ PlayResY: <span class="syn-num">1080</span>
                 `;
                 applyI18n(syntaxAnatomy);
             }
+
+            updateCodeScrollFade();
         }
 
         function escapeHtml(str) {
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
+
+        // 程式碼面板長行捲動提示：右側尚有內容時於面板右緣顯示漸隱（深淺色皆適用，
+        // 不改變 white-space:pre 與既有橫向捲動行為）
+        function updateCodeScrollFade() {
+            const codeOutput = document.getElementById('code-output');
+            const fade = document.getElementById('code-scroll-fade');
+            if (!codeOutput || !fade) return;
+            const remaining = codeOutput.scrollWidth - codeOutput.clientWidth - codeOutput.scrollLeft;
+            fade.style.opacity = remaining > 4 ? '1' : '0';
+        }
+        document.getElementById('code-output').addEventListener('scroll', updateCodeScrollFade, { passive: true });
+        window.addEventListener('resize', updateCodeScrollFade);
 
         // Copy Code Helper
         function copyCode() {
