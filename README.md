@@ -4,6 +4,10 @@
 
 ![社群預覽圖](assets/og-image.png)
 
+## 線上預覽
+
+直接瀏覽 GitHub Pages 線上版本：https://subtitle-formats.gh.miniasp.com/
+
 ## 簡介
 
 這是一個單一 HTML 檔案的互動式網頁教學，深入淺出地比較 SRT (SubRip)、WebVTT、ASS/SSA (Advanced SubStation Alpha) 三大主流字幕格式。無論你是影片剪輯師、前端工程師，或只是正在為作品挑選字幕格式的創作者，都能透過即時互動與視覺化對比，快速掌握每個格式的語法結構、適用場景與取捨。
